@@ -6,25 +6,69 @@
 namespace {
 constexpr uint32_t kHeaderTitleY = 20;
 constexpr uint32_t kStatusAreaY = 40;
+constexpr uint16_t kOrange = 0xFDA0;  // 16-bit 565 Orange
+
+uint16_t StateColor(UiHelpers::DeviceState state) {
+  switch (state) {
+    case UiHelpers::DeviceState::kBoot:
+      return YELLOW;
+    case UiHelpers::DeviceState::kWifiConnected:
+      return GREEN;
+    case UiHelpers::DeviceState::kWsReady:
+      return BLUE;
+    case UiHelpers::DeviceState::kScanDone:
+      return RED;
+    case UiHelpers::DeviceState::kCubeConnected:
+      return kOrange;
+    case UiHelpers::DeviceState::kWriteDone:
+      return BLACK;
+    default:
+      return BLACK;
+  }
+}
+
+bool IsLightBackground(uint16_t color) {
+  // Simple heuristic: prefer black text on bright backgrounds.
+  return color == YELLOW || color == GREEN || color == kOrange;
+}
 }  // namespace
 
 void UiHelpers::Begin() {
   auto& display = M5.Display;
-  display.fillScreen(BLACK);
+  display.fillScreen(bg_color_);
   display.setTextDatum(TL_DATUM);
-  display.setTextColor(WHITE, BLACK);
+  display.setTextColor(text_color_, bg_color_);
   last_display_ms_ = millis();
+}
+
+void UiHelpers::SetBackground(DeviceState state) {
+  if (state == last_state_) {
+    return;
+  }
+  last_state_ = state;
+  bg_color_ = StateColor(state);
+  text_color_ = IsLightBackground(bg_color_) ? BLACK : WHITE;
+
+  auto& display = M5.Display;
+  display.fillScreen(bg_color_);
+  display.setTextColor(text_color_, bg_color_);
+  if (!last_header_.empty()) {
+    DrawHeader(last_header_.c_str(), last_header_small_);
+  }
 }
 
 void UiHelpers::DrawHeader(const char* message, bool small) {
   auto& display = M5.Display;
-  const char* text = (message && message[0] != '\0') ? message
-                                                     : "Toio Position Monitor";
-  display.fillScreen(BLACK);
+  const char* text = (message && message[0] != '\0')
+                         ? message
+                         : "Toio Position Monitor";
+  last_header_ = text;
+  last_header_small_ = small;
+  display.fillScreen(bg_color_);
   display.setTextDatum(MC_DATUM);
-  display.setTextColor(WHITE, BLACK);
+  display.setTextColor(text_color_, bg_color_);
   display.setTextSize(small ? 2 : 3);
-  display.drawString(text, display.width() / 2, kHeaderTitleY);
+  display.drawString(last_header_.c_str(), display.width() / 2, kHeaderTitleY);
   display.setTextSize(1);
   display.setTextDatum(TL_DATUM);
 }
@@ -61,9 +105,9 @@ void UiHelpers::LogScanResults(const std::vector<std::string>& suffixes) {
                 static_cast<unsigned long>(suffixes.size()));
   auto& display = M5.Display;
   display.fillRect(0, kStatusAreaY, display.width(),
-                   display.height() - kStatusAreaY, BLACK);
+                   display.height() - kStatusAreaY, bg_color_);
   display.setCursor(0, kStatusAreaY);
-  display.setTextColor(WHITE, BLACK);
+  display.setTextColor(text_color_, bg_color_);
   display.printf("Scan: %zu device(s)\n",
                  static_cast<unsigned long>(suffixes.size()));
 
@@ -109,8 +153,9 @@ void UiHelpers::UpdateStatus(const CubePose& pose, bool has_pose,
 void UiHelpers::ShowStatus(uint32_t now_ms) {
   auto& display = M5.Display;
   display.fillRect(0, kStatusAreaY, display.width(),
-                   display.height() - kStatusAreaY, BLACK);
+                   display.height() - kStatusAreaY, bg_color_);
   display.setCursor(6, kStatusAreaY + 4);
+  display.setTextColor(text_color_, bg_color_);
 
   display.printf("t:%08lu ms\n", static_cast<unsigned long>(now_ms));
   M5.Log.printf("[%08lu ms][display] ", static_cast<unsigned long>(now_ms));

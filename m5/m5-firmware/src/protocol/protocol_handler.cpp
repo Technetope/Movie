@@ -71,6 +71,9 @@ void ProtocolHandler::HandleMessage(const std::string& payload) {
 
   if (strcmp(type, "scan") == 0) {
     auto result = commands_.Scan(kDefaultScanDurationSec);
+    if (result.status == ToioController::InitStatus::kScanReady) {
+      ui_.SetBackground(UiHelpers::DeviceState::kScanDone);
+    }
     SendScanResult(id, result);
     return;
   }
@@ -79,6 +82,9 @@ void ProtocolHandler::HandleMessage(const std::string& payload) {
     const char* suffix = ReadString(doc["suffix"]);
     std::string suffix_str = suffix ? suffix : "";
     auto status = commands_.Connect(suffix_str);
+    if (status == ToioController::InitStatus::kConnected) {
+      ui_.SetBackground(UiHelpers::DeviceState::kCubeConnected);
+    }
     SendConnectResult(id, suffix_str, status);
     return;
   }
@@ -168,6 +174,7 @@ void ProtocolHandler::HandleMessage(const std::string& payload) {
       SendError(id, "invalid-label");
       return;
     }
+    ui_.SetBackground(UiHelpers::DeviceState::kWsReady);
     ui_.SetCustomLabel(label);
     SendAck("display-label-result", id, true);
     return;
@@ -246,6 +253,7 @@ void ProtocolHandler::HandleMessage(const std::string& payload) {
       SendError(id, "invalid-timeline");
       return;
     }
+    ui_.SetBackground(UiHelpers::DeviceState::kWriteDone);
     SendAck("timeline-load-result", id, true);
     return;
   }

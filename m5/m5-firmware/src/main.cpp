@@ -3,6 +3,7 @@
 #include <string>
 #include <sys/time.h>
 #include <time.h>
+#include <esp_system.h>
 
 #include "commands/command_dispatcher.h"
 #include "controller/toio_controller.h"
@@ -46,6 +47,7 @@ void InitializeM5Hardware() {
 
   M5.Display.setRotation(3);
   g_ui.Begin();
+  g_ui.SetBackground(UiHelpers::DeviceState::kBoot);
   g_ui.DrawHeader("Wi-Fi connecting...", true);
   g_wav_player.Begin();
 }
@@ -66,6 +68,7 @@ void setup() {
     g_ui.DrawHeader("Wi-Fi failed");
     return;
   }
+  g_ui.SetBackground(UiHelpers::DeviceState::kWifiConnected);
 
   // NTP time sync for timeline absolute start
   configTime(0, 0, "ntp.nict.jp", "pool.ntp.org");
@@ -78,6 +81,14 @@ void setup() {
 
 void loop() {
   M5.update();
+  if (M5.BtnA.pressedFor(1500)) {
+    M5.Log.println("Power off requested (BtnA hold)");
+    M5.Power.powerOff();
+  }
+  if (M5.BtnA.wasReleased() && !M5.BtnA.pressedFor(1500)) {
+    M5.Log.println("Reset requested (BtnA)");
+    esp_restart();
+  }
   g_toio.loop();
   g_server.Loop();
   g_wav_player.Loop();

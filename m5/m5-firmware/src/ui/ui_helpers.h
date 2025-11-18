@@ -8,7 +8,17 @@
 
 class UiHelpers {
  public:
+  enum class DeviceState {
+    kBoot,
+    kWifiConnected,
+    kWsReady,
+    kScanDone,
+    kCubeConnected,
+    kWriteDone,
+  };
+
   void Begin();
+  void SetBackground(DeviceState state);
   void DrawHeader(const char* message, bool small = false);
   void ShowInitResult(ToioController::InitStatus status);
    // スキャン結果（suffix 一覧）のログ＋画面出力
@@ -37,6 +47,11 @@ class UiHelpers {
   void ShowStatus(uint32_t now_ms);
 
   UiStatus status_{};
+  DeviceState last_state_ = DeviceState::kBoot;
+  uint16_t bg_color_ = 0x0000;   // BLACK
+  uint16_t text_color_ = 0xFFFF; // WHITE
   uint32_t last_display_ms_ = 0;
   std::string custom_label_;
+  std::string last_header_;
+  bool last_header_small_ = false;
 };
