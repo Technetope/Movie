@@ -54,6 +54,10 @@ void CommandDispatcher::StopTimeline(bool clear_goal) {
   controller_.stopTimeline(clear_goal);
 }
 
+uint64_t CommandDispatcher::EpochMillis() const {
+  return controller_.epochMillis();
+}
+
 void CommandDispatcher::SetTimelineCallback(
     ToioController::TimelineCallback cb) {
   controller_.setTimelineCallback(std::move(cb));

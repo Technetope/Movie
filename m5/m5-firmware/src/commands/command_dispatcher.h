@@ -29,6 +29,7 @@ class CommandDispatcher {
   bool LoadTimeline(const std::vector<ToioController::TimelineFrame>& frames);
   bool StartTimeline(uint32_t delay_ms);
   void StopTimeline(bool clear_goal = true);
+  uint64_t EpochMillis() const;
   void SetTimelineCallback(ToioController::TimelineCallback cb);
   void ClearGoal();
 

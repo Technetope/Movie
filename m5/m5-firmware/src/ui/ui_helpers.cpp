@@ -1,6 +1,7 @@
 #include "ui/ui_helpers.h"
 
 #include <M5Unified.h>
+#include <ctime>
 
 namespace {
 constexpr uint32_t kHeaderTitleY = 14;
@@ -78,7 +79,7 @@ void UiHelpers::UpdateStatus(const CubePose& pose, bool has_pose,
                              uint8_t battery_level, bool has_battery,
                              float board_voltage, const ToioLedColor& led,
                              const ToioMotorState& motor, bool pose_dirty,
-                             bool battery_dirty,
+                             bool battery_dirty, uint64_t epoch_ms,
                              uint32_t refresh_interval_ms) {
   status_.pose = pose;
   status_.has_pose = has_pose;
@@ -87,6 +88,7 @@ void UiHelpers::UpdateStatus(const CubePose& pose, bool has_pose,
   status_.board_voltage = board_voltage;
   status_.led = led;
   status_.motor = motor;
+  status_.epoch_ms = epoch_ms;
 
   const uint32_t now_ms = millis();
   const bool needs_update = pose_dirty || battery_dirty ||
@@ -107,6 +109,18 @@ void UiHelpers::ShowStatus(uint32_t now_ms) {
 
   display.printf("t:%08lu ms\n", static_cast<unsigned long>(now_ms));
   M5.Log.printf("[%08lu ms][display] ", static_cast<unsigned long>(now_ms));
+
+  if (status_.epoch_ms > 0) {
+    time_t sec = static_cast<time_t>(status_.epoch_ms / 1000ULL);
+    struct tm tm_now;
+    localtime_r(&sec, &tm_now);
+    char buf[32];
+    strftime(buf, sizeof(buf), "%H:%M:%S", &tm_now);
+    const uint32_t msec = static_cast<uint32_t>(status_.epoch_ms % 1000ULL);
+    display.printf("Time: %s.%03u\n", buf, static_cast<unsigned>(msec));
+  } else {
+    display.printf("Time: n/a\n");
+  }
 
   if (status_.has_pose) {
     display.printf("Cube  X:%4u  Y:%4u \n Angle:%3u, on_mat:%s\n", status_.pose.x,

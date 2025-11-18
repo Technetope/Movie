@@ -1,6 +1,8 @@
 #include <M5Unified.h>
 #include <cstdio>
 #include <string>
+#include <sys/time.h>
+#include <time.h>
 
 #include "commands/command_dispatcher.h"
 #include "controller/toio_controller.h"
@@ -49,6 +51,9 @@ void setup() {
     return;
   }
 
+  // NTP time sync for timeline absolute start
+  configTime(0, 0, "ntp.nict.jp", "pool.ntp.org");
+
   char header[64];
   snprintf(header, sizeof(header), "WS %s:%u",
            g_server.local_ip().toString().c_str(),
@@ -69,7 +74,15 @@ void loop() {
   g_ui.UpdateStatus(g_toio.pose(), g_toio.hasPose(), g_toio.batteryLevel(),
                     g_toio.hasBatteryLevel(), board_voltage,
                     g_toio.ledColor(), g_toio.motorState(), pose_dirty,
-                    battery_dirty, kRefreshIntervalMs);
+                    battery_dirty,
+                    // epoch ms (NTP同期済みなら有効)
+                    ([]() -> uint64_t {
+                      timeval tv{};
+                      if (gettimeofday(&tv, nullptr) != 0) return 0;
+                      return static_cast<uint64_t>(tv.tv_sec) * 1000ULL +
+                             static_cast<uint64_t>(tv.tv_usec) / 1000ULL;
+                    })(),
+                    kRefreshIntervalMs);
   if (pose_dirty) {
     g_toio.clearPoseDirty();
   }

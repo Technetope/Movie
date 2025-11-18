@@ -83,6 +83,8 @@ class ToioController {
   using TimelineCallback =
       std::function<void(size_t index, const TimelineFrame& frame)>;
   void setTimelineCallback(TimelineCallback cb) { timeline_callback_ = cb; }
+  // Returns epoch milliseconds if available, otherwise 0.
+  uint64_t epochMillis() const;
 
  private:
   struct ScanEntry {

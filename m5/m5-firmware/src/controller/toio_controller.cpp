@@ -1,6 +1,7 @@
 #include "controller/toio_controller.h"
 
 #include <cmath>
+#include <sys/time.h>
 
 namespace {
 std::string ExtractToioSuffix(const std::string& name) {
@@ -178,6 +179,15 @@ void ToioController::stopTimeline(bool clear_goal) {
   if (clear_goal) {
     clearGoal();
   }
+}
+
+uint64_t ToioController::epochMillis() const {
+  timeval tv{};
+  if (gettimeofday(&tv, nullptr) != 0) {
+    return 0;
+  }
+  return static_cast<uint64_t>(tv.tv_sec) * 1000ULL +
+         static_cast<uint64_t>(tv.tv_usec) / 1000ULL;
 }
 
 ToioController::InitStatus ToioController::connectCore(ToioCore* core) {

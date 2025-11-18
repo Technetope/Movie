@@ -235,7 +235,16 @@ void ProtocolHandler::HandleMessage(const std::string& payload) {
   }
 
   if (strcmp(type, "timeline-start") == 0) {
-    const uint32_t delay_ms = doc["delay_ms"] | 0;
+    uint32_t delay_ms = doc["delay_ms"] | 0;
+    const uint64_t start_epoch_ms = doc["start_epoch_ms"] | 0ULL;
+    if (start_epoch_ms > 0) {
+      const uint64_t now_ms = commands_.EpochMillis();
+      if (now_ms > 0 && start_epoch_ms > now_ms) {
+        delay_ms = static_cast<uint32_t>(start_epoch_ms - now_ms);
+      } else {
+        delay_ms = 0;
+      }
+    }
     const bool ok = commands_.StartTimeline(delay_ms);
     SendAck("timeline-start-result", id, ok, ok ? nullptr : "no-timeline");
     return;

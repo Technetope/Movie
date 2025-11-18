@@ -291,6 +291,7 @@
         <textarea id="timeline-input" spellcheck="false" placeholder='{"frames":[...]}'></textarea>
         <div class="row-inputs">
           <input id="timeline-delay" type="number" min="0" step="100" placeholder="start delay ms (default 0)">
+          <input id="timeline-start-offset" type="number" min="0" step="0.1" placeholder="start offset seconds (optional)">
         </div>
         <div class="flex">
           <button id="timeline-load-btn">書き込み</button>
@@ -329,6 +330,7 @@
     const logView = document.getElementById("log");
     const timelineInput = document.getElementById("timeline-input");
     const timelineDelayInput = document.getElementById("timeline-delay");
+    const timelineStartOffsetInput = document.getElementById("timeline-start-offset");
 
     const hostInput = document.getElementById("host");
     const portInput = document.getElementById("port");
@@ -684,8 +686,17 @@
         log("timeline not loaded; please write first", "error");
         return;
       }
+      const startOffsetSec = timelineStartOffsetInput.value
+        ? Number(timelineStartOffsetInput.value)
+        : 0;
+      const startEpoch =
+        startOffsetSec > 0 ? Math.floor(Date.now() + startOffsetSec * 1000) : 0;
       const delay = timelineDelayInput.value ? Number(timelineDelayInput.value) : 0;
-      send("timeline-start", { delay_ms: delay });
+      const payload = { delay_ms: delay };
+      if (startEpoch > 0) {
+        payload.start_epoch_ms = startEpoch;
+      }
+      send("timeline-start", payload);
     }
 
     function sendTimelineInitGoal() {
