@@ -1,0 +1,4044 @@
+{
+  "sets": [
+    {
+      "id": "robot_00",
+      "frames": [
+        {
+          "time": 0.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 1.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 656.2,
+          "y": 502.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 4.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 6.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 7.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 656.2,
+          "y": 70.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 10.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 12.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 13.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 198.7,
+          "y": 70.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 16.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 18.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 19.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 198.7,
+          "y": 502.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 22.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 24.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 133.325,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 25.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 427.45,
+          "y": 286.5,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 28.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 30.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 31.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 130.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 130.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 656.2,
+          "y": 502.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 135.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 136.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 656.2,
+          "y": 70.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 141.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 141.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 198.7,
+          "y": 70.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 146.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 147.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 198.7,
+          "y": 502.25,
+          "stop_distance": 20.0
+        }
+      ]
+    },
+    {
+      "id": "robot_01",
+      "frames": [
+        {
+          "time": 0.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 1.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 698.9,
+          "y": 502.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 4.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 6.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 7.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 698.9,
+          "y": 70.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 10.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 12.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 13.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 241.4,
+          "y": 70.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 16.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 18.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 19.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 241.4,
+          "y": 502.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 22.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 24.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 133.325,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 25.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 470.15,
+          "y": 286.5,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 28.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 30.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 31.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 130.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 130.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 698.9,
+          "y": 502.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 135.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 136.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 698.9,
+          "y": 70.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 141.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 141.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 241.4,
+          "y": 70.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 146.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 147.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 241.4,
+          "y": 502.25,
+          "stop_distance": 20.0
+        }
+      ]
+    },
+    {
+      "id": "robot_02",
+      "frames": [
+        {
+          "time": 0.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 1.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 741.6,
+          "y": 502.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 4.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 6.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 7.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 741.6,
+          "y": 70.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 10.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 12.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 13.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 284.1,
+          "y": 70.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 16.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 18.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 19.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 284.1,
+          "y": 502.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 22.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 24.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 133.325,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 25.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 512.85,
+          "y": 286.5,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 28.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 30.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 31.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 130.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 130.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 741.6,
+          "y": 502.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 135.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 136.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 741.6,
+          "y": 70.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 141.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 141.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 284.1,
+          "y": 70.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 146.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 147.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 284.1,
+          "y": 502.25,
+          "stop_distance": 20.0
+        }
+      ]
+    },
+    {
+      "id": "robot_03",
+      "frames": [
+        {
+          "time": 0.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 1.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 784.3,
+          "y": 502.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 4.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 6.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 7.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 784.3,
+          "y": 70.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 10.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 12.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 13.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 326.8,
+          "y": 70.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 16.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 18.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 19.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 326.8,
+          "y": 502.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 22.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 24.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 133.325,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 25.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 555.55,
+          "y": 286.5,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 28.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 30.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 31.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 130.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 130.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 784.3,
+          "y": 502.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 135.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 136.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 784.3,
+          "y": 70.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 141.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 141.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 326.8,
+          "y": 70.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 146.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 147.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 326.8,
+          "y": 502.25,
+          "stop_distance": 20.0
+        }
+      ]
+    },
+    {
+      "id": "robot_04",
+      "frames": [
+        {
+          "time": 0.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 1.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 656.2,
+          "y": 592.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 4.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 6.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 7.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 656.2,
+          "y": 160.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 10.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 12.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 13.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 198.7,
+          "y": 160.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 16.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 18.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 19.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 198.7,
+          "y": 592.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 22.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 24.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 133.325,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 25.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 427.45,
+          "y": 376.5,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 28.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 30.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 31.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 130.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 130.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 656.2,
+          "y": 592.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 135.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 136.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 656.2,
+          "y": 160.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 141.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 141.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 198.7,
+          "y": 160.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 146.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 147.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 198.7,
+          "y": 592.25,
+          "stop_distance": 20.0
+        }
+      ]
+    },
+    {
+      "id": "robot_05",
+      "frames": [
+        {
+          "time": 0.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 1.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 698.9,
+          "y": 592.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 4.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 6.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 7.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 698.9,
+          "y": 160.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 10.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 12.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 13.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 241.4,
+          "y": 160.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 16.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 18.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 19.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 241.4,
+          "y": 592.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 22.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 24.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 133.325,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 25.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 470.15,
+          "y": 376.5,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 28.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 30.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 31.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 130.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 130.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 698.9,
+          "y": 592.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 135.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 136.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 698.9,
+          "y": 160.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 141.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 141.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 241.4,
+          "y": 160.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 146.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 147.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 241.4,
+          "y": 592.25,
+          "stop_distance": 20.0
+        }
+      ]
+    },
+    {
+      "id": "robot_06",
+      "frames": [
+        {
+          "time": 0.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 1.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 741.6,
+          "y": 592.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 4.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 6.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 7.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 741.6,
+          "y": 160.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 10.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 12.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 13.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 284.1,
+          "y": 160.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 16.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 18.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 19.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 284.1,
+          "y": 592.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 22.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 24.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 133.325,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 25.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 512.85,
+          "y": 376.5,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 28.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 30.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 31.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 130.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 130.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 741.6,
+          "y": 592.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 135.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 136.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 741.6,
+          "y": 160.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 141.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 141.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 284.1,
+          "y": 160.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 146.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 147.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 284.1,
+          "y": 592.25,
+          "stop_distance": 20.0
+        }
+      ]
+    },
+    {
+      "id": "robot_07",
+      "frames": [
+        {
+          "time": 0.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 1.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 784.3,
+          "y": 592.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 4.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 6.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 7.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 784.3,
+          "y": 160.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 10.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 12.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 13.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 326.8,
+          "y": 160.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 16.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 18.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 19.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 326.8,
+          "y": 592.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 22.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 24.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 133.325,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 25.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 555.55,
+          "y": 376.5,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 28.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 30.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 31.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 130.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 130.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 784.3,
+          "y": 592.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 135.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 136.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 784.3,
+          "y": 160.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 141.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 141.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 326.8,
+          "y": 160.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 146.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 147.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 326.8,
+          "y": 592.25,
+          "stop_distance": 20.0
+        }
+      ]
+    },
+    {
+      "id": "robot_08",
+      "frames": [
+        {
+          "time": 0.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 1.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 656.2,
+          "y": 682.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 4.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 6.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 7.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 656.2,
+          "y": 250.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 10.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 12.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 13.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 198.7,
+          "y": 250.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 16.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 18.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 19.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 198.7,
+          "y": 682.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 22.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 24.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 133.325,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 25.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 427.45,
+          "y": 466.5,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 28.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 30.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 31.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 130.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 130.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 656.2,
+          "y": 682.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 135.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 136.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 656.2,
+          "y": 250.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 141.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 141.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 198.7,
+          "y": 250.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 146.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 147.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 198.7,
+          "y": 682.25,
+          "stop_distance": 20.0
+        }
+      ]
+    },
+    {
+      "id": "robot_09",
+      "frames": [
+        {
+          "time": 0.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 1.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 698.9,
+          "y": 682.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 4.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 6.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 7.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 698.9,
+          "y": 250.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 10.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 12.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 13.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 241.4,
+          "y": 250.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 16.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 18.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 19.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 241.4,
+          "y": 682.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 22.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 24.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 133.325,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 25.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 470.15,
+          "y": 466.5,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 28.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 30.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 31.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 130.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 130.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 698.9,
+          "y": 682.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 135.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 136.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 698.9,
+          "y": 250.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 141.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 141.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 241.4,
+          "y": 250.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 146.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 147.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 241.4,
+          "y": 682.25,
+          "stop_distance": 20.0
+        }
+      ]
+    },
+    {
+      "id": "robot_10",
+      "frames": [
+        {
+          "time": 0.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 1.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 741.6,
+          "y": 682.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 4.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 6.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 7.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 741.6,
+          "y": 250.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 10.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 12.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 13.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 284.1,
+          "y": 250.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 16.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 18.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 19.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 284.1,
+          "y": 682.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 22.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 24.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 133.325,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 25.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 512.85,
+          "y": 466.5,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 28.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 30.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 31.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 130.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 130.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 741.6,
+          "y": 682.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 135.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 136.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 741.6,
+          "y": 250.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 141.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 141.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 284.1,
+          "y": 250.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 146.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 147.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 284.1,
+          "y": 682.25,
+          "stop_distance": 20.0
+        }
+      ]
+    },
+    {
+      "id": "robot_11",
+      "frames": [
+        {
+          "time": 0.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 1.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 784.3,
+          "y": 682.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 4.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 6.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 7.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 784.3,
+          "y": 250.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 10.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 12.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 13.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 326.8,
+          "y": 250.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 16.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 18.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 19.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 326.8,
+          "y": 682.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 22.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 24.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 133.325,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 25.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 555.55,
+          "y": 466.5,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 28.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 30.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 31.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 130.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 130.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 784.3,
+          "y": 682.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 135.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 136.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 784.3,
+          "y": 250.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 141.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 141.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 326.8,
+          "y": 250.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 146.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 147.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 326.8,
+          "y": 682.25,
+          "stop_distance": 20.0
+        }
+      ]
+    },
+    {
+      "id": "robot_12",
+      "frames": [
+        {
+          "time": 0.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 1.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 656.2,
+          "y": 772.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 4.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 6.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 7.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 656.2,
+          "y": 340.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 10.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 12.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 13.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 198.7,
+          "y": 340.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 16.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 18.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 19.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 198.7,
+          "y": 772.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 22.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 24.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 133.325,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 25.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 427.45,
+          "y": 556.5,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 28.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 30.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 31.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 130.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 130.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 656.2,
+          "y": 772.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 135.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 136.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 656.2,
+          "y": 340.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 141.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 141.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 198.7,
+          "y": 340.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 146.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 147.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 198.7,
+          "y": 772.25,
+          "stop_distance": 20.0
+        }
+      ]
+    },
+    {
+      "id": "robot_13",
+      "frames": [
+        {
+          "time": 0.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 1.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 698.9,
+          "y": 772.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 4.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 6.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 7.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 698.9,
+          "y": 340.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 10.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 12.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 13.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 241.4,
+          "y": 340.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 16.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 18.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 19.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 241.4,
+          "y": 772.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 22.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 24.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 133.325,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 25.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 470.15,
+          "y": 556.5,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 28.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 30.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 31.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 130.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 130.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 698.9,
+          "y": 772.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 135.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 136.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 698.9,
+          "y": 340.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 141.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 141.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 241.4,
+          "y": 340.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 146.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 147.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 241.4,
+          "y": 772.25,
+          "stop_distance": 20.0
+        }
+      ]
+    },
+    {
+      "id": "robot_14",
+      "frames": [
+        {
+          "time": 0.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 1.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 741.6,
+          "y": 772.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 4.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 6.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 7.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 741.6,
+          "y": 340.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 10.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 12.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 13.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 284.1,
+          "y": 340.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 16.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 18.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 19.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 284.1,
+          "y": 772.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 22.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 24.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 133.325,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 25.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 512.85,
+          "y": 556.5,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 28.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 30.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 31.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 130.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 130.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 741.6,
+          "y": 772.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 135.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 136.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 741.6,
+          "y": 340.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 141.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 141.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 284.1,
+          "y": 340.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 146.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 147.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 284.1,
+          "y": 772.25,
+          "stop_distance": 20.0
+        }
+      ]
+    },
+    {
+      "id": "robot_15",
+      "frames": [
+        {
+          "time": 0.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 1.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 784.3,
+          "y": 772.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 4.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 6.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 7.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 784.3,
+          "y": 340.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 10.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 12.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 13.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 326.8,
+          "y": 340.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 16.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 18.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 19.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 326.8,
+          "y": 772.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 22.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 24.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 133.325,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 25.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 555.55,
+          "y": 556.5,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 28.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 30.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 31.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 130.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 130.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 784.3,
+          "y": 772.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 135.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 136.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 784.3,
+          "y": 340.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 141.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 141.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 326.8,
+          "y": 340.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 146.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 147.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 326.8,
+          "y": 772.25,
+          "stop_distance": 20.0
+        }
+      ]
+    },
+    {
+      "id": "robot_16",
+      "frames": [
+        {
+          "time": 0.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 1.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 656.2,
+          "y": 862.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 4.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 6.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 7.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 656.2,
+          "y": 430.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 10.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 12.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 13.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 198.7,
+          "y": 430.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 16.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 18.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 19.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 198.7,
+          "y": 862.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 22.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 24.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 133.325,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 25.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 427.45,
+          "y": 646.5,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 28.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 30.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 31.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 130.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 130.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 656.2,
+          "y": 862.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 135.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 136.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 656.2,
+          "y": 430.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 141.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 141.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 198.7,
+          "y": 430.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 146.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 147.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 198.7,
+          "y": 862.25,
+          "stop_distance": 20.0
+        }
+      ]
+    },
+    {
+      "id": "robot_17",
+      "frames": [
+        {
+          "time": 0.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 1.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 698.9,
+          "y": 862.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 4.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 6.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 7.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 698.9,
+          "y": 430.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 10.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 12.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 13.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 241.4,
+          "y": 430.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 16.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 18.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 19.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 241.4,
+          "y": 862.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 22.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 24.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 133.325,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 25.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 470.15,
+          "y": 646.5,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 28.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 30.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 31.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 130.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 130.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 698.9,
+          "y": 862.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 135.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 136.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 698.9,
+          "y": 430.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 141.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 141.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 241.4,
+          "y": 430.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 146.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 147.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 241.4,
+          "y": 862.25,
+          "stop_distance": 20.0
+        }
+      ]
+    },
+    {
+      "id": "robot_18",
+      "frames": [
+        {
+          "time": 0.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 1.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 741.6,
+          "y": 862.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 4.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 6.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 7.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 741.6,
+          "y": 430.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 10.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 12.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 13.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 284.1,
+          "y": 430.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 16.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 18.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 19.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 284.1,
+          "y": 862.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 22.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 24.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 133.325,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 25.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 512.85,
+          "y": 646.5,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 28.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 30.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 31.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 130.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 130.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 741.6,
+          "y": 862.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 135.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 136.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 741.6,
+          "y": 430.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 141.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 141.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 284.1,
+          "y": 430.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 146.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 147.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 284.1,
+          "y": 862.25,
+          "stop_distance": 20.0
+        }
+      ]
+    },
+    {
+      "id": "robot_19",
+      "frames": [
+        {
+          "time": 0.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 1.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 784.3,
+          "y": 862.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 4.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 6.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 7.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 784.3,
+          "y": 430.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 10.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 12.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 13.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 326.8,
+          "y": 430.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 16.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 18.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 19.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 326.8,
+          "y": 862.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 22.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 24.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 133.325,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 25.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 555.55,
+          "y": 646.5,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 28.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 30.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 31.0,
+          "use_position": false,
+          "use_rotation": false,
+          "sound": null
+        },
+        {
+          "time": 130.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 90.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 130.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 784.3,
+          "y": 862.25,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 135.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 0.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 136.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 784.3,
+          "y": 430.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 141.0,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 270.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 141.5,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 326.8,
+          "y": 430.75,
+          "stop_distance": 20.0
+        },
+        {
+          "time": 146.5,
+          "use_position": false,
+          "use_rotation": true,
+          "sound": null,
+          "rotation": 180.0,
+          "angle_tolerance": 5.0
+        },
+        {
+          "time": 147.0,
+          "use_position": true,
+          "use_rotation": false,
+          "sound": null,
+          "x": 326.8,
+          "y": 862.25,
+          "stop_distance": 20.0
+        }
+      ]
+    }
+  ]
+}

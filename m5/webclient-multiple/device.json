@@ -1,0 +1,10 @@
+{
+  "devices": [
+    { "id": "robot_00", "ip_suffix": 165 },
+    { "id": "robot_01", "ip_suffix": 143 },
+    { "id": "robot_02", "ip_suffix": 12 },
+    { "id": "robot_03", "ip_suffix": 13 },
+    { "id": "robot_04", "ip_suffix": 14 },
+    { "id": "robot_05", "ip_suffix": 15 }
+  ]
+}
