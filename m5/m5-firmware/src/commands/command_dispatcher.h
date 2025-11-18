@@ -35,6 +35,7 @@ class CommandDispatcher {
 
   void SetStatusSubscription(bool enable);
   bool StatusSubscriptionEnabled() const { return status_subscription_enabled_; }
+  void SetBoardVoltage(float voltage);
 
   struct StatusSnapshot {
     bool has_core = false;
@@ -42,6 +43,8 @@ class CommandDispatcher {
     CubePose pose{};
     bool has_battery = false;
     uint8_t battery_level = 0;
+    bool has_board_voltage = false;
+    float board_voltage = 0.0f;
     ToioLedColor led{};
     ToioMotorState motor{};
     bool goal_active = false;
@@ -51,4 +54,6 @@ class CommandDispatcher {
  private:
   ToioController& controller_;
   bool status_subscription_enabled_ = false;
+  bool has_board_voltage_ = false;
+  float board_voltage_ = 0.0f;
 };

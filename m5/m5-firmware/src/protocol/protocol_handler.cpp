@@ -343,6 +343,9 @@ void ProtocolHandler::SendStatus(const char* id) {
   if (snapshot.has_battery) {
     doc["batt"] = snapshot.battery_level;
   }
+  if (snapshot.has_board_voltage) {
+    doc["board_v"] = snapshot.board_voltage;
+  }
   doc["goal_active"] = snapshot.goal_active;
 
   auto led = doc.createNestedArray("led");

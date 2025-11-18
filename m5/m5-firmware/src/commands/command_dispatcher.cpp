@@ -78,8 +78,15 @@ CommandDispatcher::StatusSnapshot CommandDispatcher::GetStatus() const {
   snapshot.pose = controller_.pose();
   snapshot.has_battery = controller_.hasBatteryLevel();
   snapshot.battery_level = controller_.batteryLevel();
+  snapshot.has_board_voltage = has_board_voltage_;
+  snapshot.board_voltage = board_voltage_;
   snapshot.led = controller_.ledColor();
   snapshot.motor = controller_.motorState();
   snapshot.goal_active = controller_.hasGoal();
   return snapshot;
+}
+
+void CommandDispatcher::SetBoardVoltage(float voltage) {
+  board_voltage_ = voltage;
+  has_board_voltage_ = true;
 }

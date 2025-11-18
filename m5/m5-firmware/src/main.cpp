@@ -70,6 +70,7 @@ void loop() {
   const bool battery_dirty = g_toio.batteryDirty();
 
   const float board_voltage = M5.Power.getBatteryVoltage()*(3.3f/4096.0f);
+  g_commands.SetBoardVoltage(board_voltage);
 
   g_ui.UpdateStatus(g_toio.pose(), g_toio.hasPose(), g_toio.batteryLevel(),
                     g_toio.hasBatteryLevel(), board_voltage,

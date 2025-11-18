@@ -181,6 +181,7 @@
             </div>
             <div>Pose: <span class="mono" id="pose-text">-</span></div>
             <div>Battery: <span class="mono" id="batt-text">-</span></div>
+            <div>Board V: <span class="mono" id="boardv-text">-</span></div>
             <div>LED: <span class="mono" id="led-text">-</span></div>
             <div>Motor: <span class="mono" id="motor-text">-</span></div>
           </div>
@@ -409,6 +410,8 @@
       setCubeState(!!msg.connected);
       poseText.textContent = formatPose(msg);
       battText.textContent = typeof msg.batt === "number" ? `${msg.batt}%` : "-";
+      const board = typeof msg.board_v === "number" ? `${msg.board_v.toFixed(2)}V` : "-";
+      document.getElementById("boardv-text").textContent = board;
       ledText.textContent = formatArray(msg.led);
       motorText.textContent = formatArray(msg.motor);
       goalMarker.textContent = msg.goal_active ? "goal active" : "goal inactive";
