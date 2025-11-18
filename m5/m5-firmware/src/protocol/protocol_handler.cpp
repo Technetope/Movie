@@ -95,14 +95,36 @@ void ProtocolHandler::HandleMessage(const std::string& payload) {
   }
 
   if (strcmp(type, "goal-set") == 0) {
-    if (!doc["x"].is<float>() || !doc["y"].is<float>()) {
+    const bool use_position = doc["use_position"] | true;
+    const bool use_heading = doc["use_heading"] | false;
+    if (!use_position && !use_heading) {
       SendError(id, "invalid-goal");
       return;
     }
-    const float x = doc["x"];
-    const float y = doc["y"];
+
+    float x = 0.0f;
+    float y = 0.0f;
+    if (use_position) {
+      if (!doc["x"].is<float>() || !doc["y"].is<float>()) {
+        SendError(id, "invalid-goal");
+        return;
+      }
+      x = doc["x"];
+      y = doc["y"];
+    }
+
+    float angle = 0.0f;
+    if (use_heading) {
+      if (!doc["angle"].is<float>()) {
+        SendError(id, "invalid-goal");
+        return;
+      }
+      angle = doc["angle"];
+    }
+
     const float stop = doc["stop_distance"] | 20.0f;
-    commands_.SetGoal(x, y, stop);
+    const float angle_tol = doc["angle_tolerance"] | 10.0f;
+    commands_.SetGoal(x, y, stop, use_position, use_heading, angle, angle_tol);
     SendAck("goal-set-result", id, true);
     return;
   }
@@ -110,6 +132,24 @@ void ProtocolHandler::HandleMessage(const std::string& payload) {
   if (strcmp(type, "goal-clear") == 0) {
     commands_.ClearGoal();
     SendAck("goal-clear-result", id, true);
+    return;
+  }
+
+  if (strcmp(type, "goal-tuning") == 0) {
+    if (!doc["vmax"].is<float>() || !doc["wmax"].is<float>() ||
+        !doc["k_r"].is<float>() || !doc["k_a"].is<float>()) {
+      SendError(id, "invalid-goal-tuning");
+      return;
+    }
+    const float vmax = doc["vmax"];
+    const float wmax = doc["wmax"];
+    const float k_r = doc["k_r"];
+    const float k_a = doc["k_a"];
+    const float reverse_threshold = doc["reverse_threshold_deg"] | 90.0f;
+    const float reverse_hysteresis = doc["reverse_hysteresis_deg"] | 10.0f;
+    commands_.SetGoalTuning(vmax, wmax, k_r, k_a, reverse_threshold,
+                            reverse_hysteresis);
+    SendAck("goal-tuning-result", id, true);
     return;
   }
 

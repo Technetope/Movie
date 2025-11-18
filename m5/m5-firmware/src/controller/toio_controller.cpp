@@ -112,8 +112,12 @@ bool ToioController::driveMotor(int8_t left_speed, int8_t right_speed) {
   return true;
 }
 
-void ToioController::setGoal(float x, float y, float stop_distance) {
-  goal_tracker_.setGoal(x, y, stop_distance);
+void ToioController::setGoal(float x, float y, float stop_distance,
+                             bool use_position, bool use_heading,
+                             float target_angle_deg,
+                             float angle_tolerance_deg) {
+  goal_tracker_.setGoal(x, y, stop_distance, use_position, use_heading,
+                        target_angle_deg, angle_tolerance_deg);
 }
 
 void ToioController::clearGoal() {
@@ -154,7 +158,7 @@ ToioController::InitStatus ToioController::connectCore(ToioCore* core) {
 }
 
 void ToioController::configureCore(ToioCore* core) {
-  core->setIDnotificationSettings(/*minimum_interval=*/5, /*condition=*/0x01); 
+  core->setIDnotificationSettings(/*minimum_interval=*/1, /*condition=*/0x01); 
   // 5*10ms=50msごとにID通知、condition=0x01で位置変化時に通知
   core->setIDmissedNotificationSettings(/*sensitivity=*/10);
   // 10*10ms=100ms間IDが読めなかったら通知

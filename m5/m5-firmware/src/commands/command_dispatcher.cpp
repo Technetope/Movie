@@ -26,8 +26,19 @@ bool CommandDispatcher::DriveMotor(int8_t left_speed, int8_t right_speed) {
   return controller_.driveMotor(left_speed, right_speed);
 }
 
-void CommandDispatcher::SetGoal(float x, float y, float stop_distance) {
-  controller_.setGoal(x, y, stop_distance);
+void CommandDispatcher::SetGoal(float x, float y, float stop_distance,
+                                bool use_position, bool use_heading,
+                                float target_angle_deg,
+                                float angle_tolerance_deg) {
+  controller_.setGoal(x, y, stop_distance, use_position, use_heading,
+                      target_angle_deg, angle_tolerance_deg);
+}
+
+void CommandDispatcher::SetGoalTuning(float vmax, float wmax, float k_r,
+                                      float k_a, float reverse_threshold_deg,
+                                      float reverse_hysteresis_deg) {
+  controller_.setGoalTuning(vmax, wmax, k_r, k_a, reverse_threshold_deg,
+                            reverse_hysteresis_deg);
 }
 
 void CommandDispatcher::ClearGoal() {

@@ -56,7 +56,9 @@ class ToioController {
   bool driveMotor(int8_t left_speed, int8_t right_speed);
   void disconnect();
 
-  void setGoal(float x, float y, float stop_distance = 20.0f);
+  void setGoal(float x, float y, float stop_distance, bool use_position,
+               bool use_heading, float target_angle_deg,
+               float angle_tolerance_deg);
   void clearGoal();
   void setGoalTuning(float vmax, float wmax, float k_r, float k_a,
                      float reverse_threshold_deg = 90.0f,

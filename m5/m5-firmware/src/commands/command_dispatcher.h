@@ -21,7 +21,11 @@ class CommandDispatcher {
   bool SetLed(uint8_t r, uint8_t g, uint8_t b);
   bool DriveMotor(int8_t left_speed, int8_t right_speed);
 
-  void SetGoal(float x, float y, float stop_distance);
+  void SetGoal(float x, float y, float stop_distance, bool use_position,
+               bool use_heading, float target_angle_deg,
+               float angle_tolerance_deg);
+  void SetGoalTuning(float vmax, float wmax, float k_r, float k_a,
+                     float reverse_threshold_deg, float reverse_hysteresis_deg);
   void ClearGoal();
 
   void SetStatusSubscription(bool enable);
