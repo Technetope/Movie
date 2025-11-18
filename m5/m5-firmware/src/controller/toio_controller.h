@@ -39,6 +39,7 @@ class ToioController {
   void loop();
 
   bool hasActiveCore() const { return active_core_ != nullptr; }
+  const std::string& activeSuffix() const { return active_suffix_; }
   bool hasGoal() const { return goal_tracker_.hasGoal(); }
 
   bool hasPose() const { return has_pose_; }
@@ -133,4 +134,6 @@ class ToioController {
   std::function<void(const std::string&)> sound_callback_;
 
   GoalTracker goal_tracker_;
+
+  std::string active_suffix_;
 };

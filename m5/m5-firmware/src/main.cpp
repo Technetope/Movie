@@ -88,17 +88,17 @@ void loop() {
   const float board_voltage = M5.Power.getBatteryVoltage()*(3.3f/4096.0f);
   g_commands.SetBoardVoltage(board_voltage);
 
+  const uint64_t epoch_ms = []() -> uint64_t {
+    timeval tv{};
+    if (gettimeofday(&tv, nullptr) != 0) return 0;
+    return static_cast<uint64_t>(tv.tv_sec) * 1000ULL +
+           static_cast<uint64_t>(tv.tv_usec) / 1000ULL;
+  }();
+
   g_ui.UpdateStatus(g_toio.pose(), g_toio.hasPose(), g_toio.batteryLevel(),
                     g_toio.hasBatteryLevel(), board_voltage,
                     g_toio.ledColor(), g_toio.motorState(), pose_dirty,
-                    battery_dirty,
-                    // epoch ms (NTP同期済みなら有効)
-                    ([]() -> uint64_t {
-                      timeval tv{};
-                      if (gettimeofday(&tv, nullptr) != 0) return 0;
-                      return static_cast<uint64_t>(tv.tv_sec) * 1000ULL +
-                             static_cast<uint64_t>(tv.tv_usec) / 1000ULL;
-                    })(),
+                    battery_dirty, epoch_ms, g_toio.activeSuffix(),
                     kRefreshIntervalMs);
   if (pose_dirty) {
     g_toio.clearPoseDirty();

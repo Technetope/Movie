@@ -67,6 +67,7 @@ ToioController::InitStatus ToioController::connectBySuffix(
   if (status != InitStatus::kConnected) {
     return status;
   }
+  active_suffix_ = ExtractToioSuffix(target->getName());
   configureCore(target);
   return InitStatus::kConnected;
 }
@@ -140,6 +141,7 @@ void ToioController::disconnect() {
   battery_dirty_ = false;
   led_color_ = {};
   motor_state_ = {};
+  active_suffix_.clear();
 }
 
 void ToioController::setGoalTuning(float vmax, float wmax, float k_r,

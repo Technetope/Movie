@@ -42,6 +42,7 @@ class CommandDispatcher {
     bool has_core = false;
     bool has_pose = false;
     CubePose pose{};
+    std::string active_suffix;
     bool has_battery = false;
     uint8_t battery_level = 0;
     bool has_board_voltage = false;

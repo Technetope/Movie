@@ -17,7 +17,7 @@ class UiHelpers {
                     bool has_battery, float board_voltage,
                     const ToioLedColor& led, const ToioMotorState& motor,
                     bool pose_dirty, bool battery_dirty,
-                    uint64_t epoch_ms,
+                    uint64_t epoch_ms, const std::string& active_suffix,
                     uint32_t refresh_interval_ms);
 
  private:
@@ -30,6 +30,7 @@ class UiHelpers {
     ToioLedColor led{};
     ToioMotorState motor{};
     uint64_t epoch_ms = 0;
+    std::string active_suffix;
   };
 
   void ShowStatus(uint32_t now_ms);

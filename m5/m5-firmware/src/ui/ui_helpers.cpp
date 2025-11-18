@@ -80,6 +80,7 @@ void UiHelpers::UpdateStatus(const CubePose& pose, bool has_pose,
                              float board_voltage, const ToioLedColor& led,
                              const ToioMotorState& motor, bool pose_dirty,
                              bool battery_dirty, uint64_t epoch_ms,
+                             const std::string& active_suffix,
                              uint32_t refresh_interval_ms) {
   status_.pose = pose;
   status_.has_pose = has_pose;
@@ -89,6 +90,7 @@ void UiHelpers::UpdateStatus(const CubePose& pose, bool has_pose,
   status_.led = led;
   status_.motor = motor;
   status_.epoch_ms = epoch_ms;
+  status_.active_suffix = active_suffix;
 
   const uint32_t now_ms = millis();
   const bool needs_update = pose_dirty || battery_dirty ||
@@ -149,4 +151,13 @@ void UiHelpers::ShowStatus(uint32_t now_ms) {
                 status_.led.g, status_.led.b, status_.motor.left_speed,
                 status_.motor.right_speed);
   M5.Log.println();
+
+  // Show active toio suffix at bottom-left in larger font.
+  display.setTextSize(2);
+  const char* suffix = status_.active_suffix.empty()
+                           ? "no core"
+                           : status_.active_suffix.c_str();
+  display.setCursor(6, display.height() - 22);
+  display.printf("ID: %s", suffix);
+  display.setTextSize(1);
 }

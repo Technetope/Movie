@@ -81,6 +81,7 @@ CommandDispatcher::StatusSnapshot CommandDispatcher::GetStatus() const {
   snapshot.has_core = controller_.hasActiveCore();
   snapshot.has_pose = controller_.hasPose();
   snapshot.pose = controller_.pose();
+  snapshot.active_suffix = controller_.activeSuffix();
   snapshot.has_battery = controller_.hasBatteryLevel();
   snapshot.battery_level = controller_.batteryLevel();
   snapshot.has_board_voltage = has_board_voltage_;
