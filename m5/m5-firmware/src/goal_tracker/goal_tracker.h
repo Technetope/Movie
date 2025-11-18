@@ -30,7 +30,7 @@ class GoalTracker {
     float y = 0.0f;
     float stop_distance = 20.0f;
     float target_angle_deg = 0.0f;
-    float angle_tolerance_deg = 10.0f;
+    float angle_tolerance_deg = 5.0f;
   } goal_;
 
   float vmax_ = 70.0f;

@@ -54,7 +54,7 @@ void GoalTracker::clearGoal() {
   goal_.y = 0.0f;
   goal_.stop_distance = 20.0f;
   goal_.target_angle_deg = 0.0f;
-  goal_.angle_tolerance_deg = 10.0f;
+  goal_.angle_tolerance_deg = 5.0f;
   reverse_mode_ = false;
 }
 

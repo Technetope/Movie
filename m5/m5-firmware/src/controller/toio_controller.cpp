@@ -73,6 +73,7 @@ ToioController::InitStatus ToioController::connectBySuffix(
 void ToioController::loop() {
   toio_.loop();
   updateGoalTracking();
+  updateTimelinePlayback();
 }
 
 bool ToioController::setLedColor(uint8_t r, uint8_t g, uint8_t b) {
@@ -147,6 +148,38 @@ void ToioController::setGoalTuning(float vmax, float wmax, float k_r,
                           reverse_hysteresis_deg);
 }
 
+bool ToioController::loadTimeline(const std::vector<TimelineFrame>& frames) {
+  if (frames.empty() || frames.size() > kMaxTimelineFrames) {
+    return false;
+  }
+  timeline_count_ = frames.size();
+  for (size_t i = 0; i < frames.size(); ++i) {
+    timeline_frames_[i] = frames[i];
+  }
+  timeline_loaded_ = true;
+  timeline_playing_ = false;
+  timeline_next_index_ = 0;
+  return true;
+}
+
+bool ToioController::startTimeline(uint32_t delay_ms) {
+  if (!timeline_loaded_) {
+    return false;
+  }
+  timeline_start_ms_ = millis() + delay_ms;
+  timeline_next_index_ = 0;
+  timeline_playing_ = true;
+  return true;
+}
+
+void ToioController::stopTimeline(bool clear_goal) {
+  timeline_playing_ = false;
+  timeline_next_index_ = 0;
+  if (clear_goal) {
+    clearGoal();
+  }
+}
+
 ToioController::InitStatus ToioController::connectCore(ToioCore* core) {
   if (!core) {
     return InitStatus::kInvalidArgument;
@@ -203,5 +236,36 @@ void ToioController::updateGoalTracking() {
   int8_t right_speed = 0;
   if (goal_tracker_.computeCommand(pose_, &left_speed, &right_speed)) {
     driveMotor(left_speed, right_speed);
+  }
+}
+
+void ToioController::updateTimelinePlayback() {
+  if (!timeline_playing_) {
+    return;
+  }
+  const uint32_t now = millis();
+  if (now < timeline_start_ms_) {
+    return;
+  }
+  const float elapsed_s = static_cast<float>(now - timeline_start_ms_) / 1000.0f;
+
+  while (timeline_next_index_ < timeline_count_) {
+    const auto& frame = timeline_frames_[timeline_next_index_];
+    if (elapsed_s + 1e-3f < frame.time_s) {  // small margin
+      break;
+    }
+    if (frame.use_position || frame.use_heading) {
+      goal_tracker_.setGoal(frame.x, frame.y, frame.stop_distance,
+                            frame.use_position, frame.use_heading,
+                            frame.angle_deg, frame.angle_tolerance);
+    }
+    if (timeline_callback_) {
+      timeline_callback_(timeline_next_index_, frame);
+    }
+    timeline_next_index_++;
+  }
+
+  if (timeline_next_index_ >= timeline_count_) {
+    timeline_playing_ = false;
   }
 }

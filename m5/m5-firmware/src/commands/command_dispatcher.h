@@ -26,6 +26,10 @@ class CommandDispatcher {
                float angle_tolerance_deg);
   void SetGoalTuning(float vmax, float wmax, float k_r, float k_a,
                      float reverse_threshold_deg, float reverse_hysteresis_deg);
+  bool LoadTimeline(const std::vector<ToioController::TimelineFrame>& frames);
+  bool StartTimeline(uint32_t delay_ms);
+  void StopTimeline(bool clear_goal = true);
+  void SetTimelineCallback(ToioController::TimelineCallback cb);
   void ClearGoal();
 
   void SetStatusSubscription(bool enable);

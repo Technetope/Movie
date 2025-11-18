@@ -3,6 +3,8 @@
 #include <Arduino.h>
 #include <Toio.h>
 
+#include <array>
+#include <functional>
 #include <string>
 #include <vector>
 
@@ -64,6 +66,24 @@ class ToioController {
                      float reverse_threshold_deg = 90.0f,
                      float reverse_hysteresis_deg = 10.0f);
 
+  struct TimelineFrame {
+    float time_s = 0.0f;
+    bool use_position = true;
+    bool use_heading = false;
+    float x = 0.0f;
+    float y = 0.0f;
+    float angle_deg = 0.0f;
+    float stop_distance = 20.0f;
+    float angle_tolerance = 10.0f;
+  };
+
+  bool loadTimeline(const std::vector<TimelineFrame>& frames);
+  bool startTimeline(uint32_t delay_ms);
+  void stopTimeline(bool clear_goal = true);
+  using TimelineCallback =
+      std::function<void(size_t index, const TimelineFrame& frame)>;
+  void setTimelineCallback(TimelineCallback cb) { timeline_callback_ = cb; }
+
  private:
   struct ScanEntry {
     ToioCore* core = nullptr;
@@ -75,6 +95,7 @@ class ToioController {
   void handleIdData(const ToioCoreIDData& data);
   void handleBatteryLevel(uint8_t level);
   void updateGoalTracking();
+  void updateTimelinePlayback();
 
   Toio toio_;
   ToioCore* active_core_ = nullptr;
@@ -94,6 +115,15 @@ class ToioController {
   ToioMotorState motor_state_{};
 
   uint32_t scan_duration_sec_ = 0;
+
+  static constexpr size_t kMaxTimelineFrames = 240;
+  std::array<TimelineFrame, kMaxTimelineFrames> timeline_frames_{};
+  size_t timeline_count_ = 0;
+  size_t timeline_next_index_ = 0;
+  bool timeline_loaded_ = false;
+  bool timeline_playing_ = false;
+  uint32_t timeline_start_ms_ = 0;
+  TimelineCallback timeline_callback_;
 
   GoalTracker goal_tracker_;
 };

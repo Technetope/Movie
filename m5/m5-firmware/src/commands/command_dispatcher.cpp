@@ -41,6 +41,24 @@ void CommandDispatcher::SetGoalTuning(float vmax, float wmax, float k_r,
                             reverse_hysteresis_deg);
 }
 
+bool CommandDispatcher::LoadTimeline(
+    const std::vector<ToioController::TimelineFrame>& frames) {
+  return controller_.loadTimeline(frames);
+}
+
+bool CommandDispatcher::StartTimeline(uint32_t delay_ms) {
+  return controller_.startTimeline(delay_ms);
+}
+
+void CommandDispatcher::StopTimeline(bool clear_goal) {
+  controller_.stopTimeline(clear_goal);
+}
+
+void CommandDispatcher::SetTimelineCallback(
+    ToioController::TimelineCallback cb) {
+  controller_.setTimelineCallback(std::move(cb));
+}
+
 void CommandDispatcher::ClearGoal() {
   controller_.clearGoal();
 }

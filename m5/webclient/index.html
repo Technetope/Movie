@@ -248,14 +248,14 @@
               <input id="goal-y" type="number" step="1" placeholder="y">
               <input id="goal-stop" type="number" step="1" placeholder="stop distance (default 20)" value="20">
               <input id="goal-angle" type="number" step="1" placeholder="angle (deg)">
-              <input id="goal-angle-tol" type="number" step="1" placeholder="angle tol (deg, default 10)" value="10">
+              <input id="goal-angle-tol" type="number" step="1" placeholder="angle tol (deg, default 5)" value="5">
             </div>
             <div class="hint">
               x/y:目標座標, stop:到達判定距離, angle:目標角度deg, angle tol:角度許容deg
             </div>
             <div class="flex">
               <label><input id="goal-use-pos" type="checkbox" checked> use_position</label>
-              <label><input id="goal-use-ang" type="checkbox"> use_heading</label>
+              <label><input id="goal-use-rot" type="checkbox"> use_rotation</label>
             </div>
             <div class="flex">
               <button data-action="goal-set">set goal</button>
@@ -282,19 +282,24 @@
       </div>
     </div>
 
-    <div class="panel">
-      <div class="section-header">
+      <div class="panel">
+        <div class="section-header">
         <h2>JSONタイムライン再生</h2>
-        <span class="hint">上の toio 接続後、再生ボタンでフレームを送信</span>
+        <span class="hint">上の toio 接続後、フレームを書き込み→任意のタイミングで再生</span>
       </div>
       <div class="rows">
         <textarea id="timeline-input" spellcheck="false" placeholder='{"frames":[...]}'></textarea>
+        <div class="row-inputs">
+          <input id="timeline-delay" type="number" min="0" step="100" placeholder="start delay ms (default 0)">
+        </div>
         <div class="flex">
-          <button id="timeline-play">再生</button>
+          <button id="timeline-load-btn">書き込み</button>
+          <button id="timeline-start-btn">再生</button>
+          <button id="timeline-init-btn">初期位置へ</button>
           <button id="timeline-stop">停止</button>
           <button id="timeline-sample">サンプル読込</button>
         </div>
-        <p class="hint">time秒ごとにフレームを発火し、`use_position` で goal-set、`use_rotation` で角度合わせを行います。</p>
+        <p class="hint">write: timeline-load / play: timeline-start(delay_ms)。停止は timeline-stop。</p>
       </div>
     </div>
 
@@ -322,6 +327,8 @@
     const scanResult = document.getElementById("scan-result");
     const helloPill = document.getElementById("hello-pill");
     const logView = document.getElementById("log");
+    const timelineInput = document.getElementById("timeline-input");
+    const timelineDelayInput = document.getElementById("timeline-delay");
 
     const hostInput = document.getElementById("host");
     const portInput = document.getElementById("port");
@@ -343,7 +350,7 @@
       angle: document.getElementById("goal-angle"),
       angleTol: document.getElementById("goal-angle-tol"),
       usePos: document.getElementById("goal-use-pos"),
-      useAng: document.getElementById("goal-use-ang"),
+      useRot: document.getElementById("goal-use-rot"),
     };
 
     const tuningInputs = {
@@ -358,6 +365,8 @@
     let socket = null;
     let nextId = 1;
     let subscribed = false;
+    let timelineLoaded = false;
+    let lastParsedFrames = null;
 
     function log(text, tone = "info") {
       const time = new Date().toLocaleTimeString();
@@ -429,6 +438,19 @@
         scanResult.textContent = `scan-result: status=${data.status} suffixes=${suffixes}`;
       } else if (data.type === "goal-reached") {
         goalMarker.textContent = "goal reached";
+      } else if (data.type === "timeline-load-result") {
+        if (data.ok) {
+          timelineLoaded = true;
+          lastParsedFrames = null;
+          log("timeline loaded", "in");
+        } else {
+          timelineLoaded = false;
+        }
+      } else if (data.type === "timeline-start-result") {
+        log(`timeline start ${data.ok ? "ok" : "failed"}`, data.ok ? "in" : "error");
+      } else if (data.type === "timeline-stop-result") {
+        timelineLoaded = false;
+        log("timeline stopped", "in");
       }
     }
 
@@ -554,25 +576,25 @@
           break;
         case "goal-set":
           const usePos = goalInputs.usePos.checked;
-          const useAng = goalInputs.useAng.checked;
-          if (!usePos && !useAng) {
-            log("goal-set requires use_position or use_heading", "error");
+          const useRot = goalInputs.useRot.checked;
+          if (!usePos && !useRot) {
+            log("goal-set requires use_position or use_rotation", "error");
             return;
           }
           if (usePos && (goalInputs.x.value === "" || goalInputs.y.value === "")) {
             log("goal-set requires x and y when use_position is on", "error");
             return;
           }
-          if (useAng && goalInputs.angle.value === "") {
-            log("goal-set requires angle when use_heading is on", "error");
+          if (useRot && goalInputs.angle.value === "") {
+            log("goal-set requires rotation when use_rotation is on", "error");
             return;
           }
           send("goal-set", {
             use_position: usePos,
-            use_heading: useAng,
+            use_rotation: useRot,
             x: usePos ? Number(goalInputs.x.value) : undefined,
             y: usePos ? Number(goalInputs.y.value) : undefined,
-            angle: useAng ? Number(goalInputs.angle.value) : undefined,
+            rotation: useRot ? Number(goalInputs.angle.value) : undefined,
             stop_distance: goalInputs.stop.value ? Number(goalInputs.stop.value) : undefined,
             angle_tolerance: goalInputs.angleTol.value ? Number(goalInputs.angleTol.value) : undefined,
           });
@@ -604,6 +626,106 @@
       }
     }
 
+    function parseTimelineInput() {
+      let json;
+      try {
+        json = JSON.parse(timelineInput.value);
+      } catch (e) {
+        log(`timeline parse error: ${e.message}`, "error");
+        return null;
+      }
+      if (!json || !Array.isArray(json.frames) || json.frames.length === 0) {
+        log("timeline requires frames[]", "error");
+        return null;
+      }
+      const frames = [];
+      for (let i = 0; i < json.frames.length; ++i) {
+        const f = json.frames[i];
+        const up = !!f.use_position;
+        const ur = !!f.use_rotation;
+        if (typeof f.time !== "number" || f.time < 0) {
+          log(`frame ${i}: invalid time`, "error");
+          return null;
+        }
+        const frame = {
+          t: f.time,
+          up,
+          ur,
+          x: up ? Number(f.position?.x) : 0,
+          y: up ? Number(f.position?.y) : 0,
+          ang: ur ? Number(f.rotation ?? f.angle) : 0,
+          sd: typeof f.stop_distance === "number" ? f.stop_distance : 20,
+          at: typeof f.angle_tolerance === "number" ? f.angle_tolerance : 5,
+        };
+        if (up && (!Number.isFinite(frame.x) || !Number.isFinite(frame.y))) {
+          log(`frame ${i}: position x/y required`, "error");
+          return null;
+        }
+        if (ur && !Number.isFinite(frame.ang)) {
+          log(`frame ${i}: angle required`, "error");
+          return null;
+        }
+        frames.push(frame);
+      }
+      frames.sort((a, b) => a.t - b.t);
+      return frames;
+    }
+
+    function sendTimelineLoad() {
+      const frames = parseTimelineInput();
+      if (!frames) return;
+      lastParsedFrames = frames;
+      timelineLoaded = false;
+      send("timeline-load", { frames });
+    }
+
+    function sendTimelineStart() {
+      if (!timelineLoaded && !lastParsedFrames) {
+        log("timeline not loaded; please write first", "error");
+        return;
+      }
+      const delay = timelineDelayInput.value ? Number(timelineDelayInput.value) : 0;
+      send("timeline-start", { delay_ms: delay });
+    }
+
+    function sendTimelineInitGoal() {
+      const frames = parseTimelineInput();
+      if (!frames || frames.length === 0) {
+        log("timeline init: parse failed", "error");
+        return;
+      }
+      const f = frames[0];
+      if (!f.up && !f.uh) {
+      log("timeline init: first frame must have use_position or use_rotation", "error");
+        return;
+      }
+      send("goal-set", {
+        use_position: f.up,
+        use_rotation: f.ur,
+        x: f.up ? f.x : undefined,
+        y: f.up ? f.y : undefined,
+        rotation: f.ur ? f.ang : undefined,
+        stop_distance: f.sd,
+        angle_tolerance: f.at,
+      });
+    }
+
+    function stopTimelinePlayback() {
+      send("timeline-stop");
+      timelineLoaded = false;
+    }
+
+    function loadSampleTimeline() {
+      const sample = {
+        frames: [
+          { time: 0, use_position: true, use_rotation: false, position: { x: 100, y: 100 }, stop_distance: 20 },
+          { time: 5, use_position: true, use_rotation: false, position: { x: 200, y: 200 } },
+          { time: 10, use_position: false, use_rotation: true, rotation: 90, angle_tolerance: 5 },
+        ],
+      };
+      timelineInput.value = JSON.stringify(sample, null, 2);
+    }
+
     connectBtn.addEventListener("click", connect);
     disconnectBtn.addEventListener("click", disconnect);
     document.querySelectorAll("button[data-action]").forEach((btn) => {
@@ -612,6 +734,11 @@
     document.getElementById("clear-log").addEventListener("click", () => {
       logView.innerHTML = "";
     });
+    document.getElementById("timeline-load-btn").addEventListener("click", sendTimelineLoad);
+    document.getElementById("timeline-start-btn").addEventListener("click", sendTimelineStart);
+    document.getElementById("timeline-init-btn").addEventListener("click", sendTimelineInitGoal);
+    document.getElementById("timeline-stop").addEventListener("click", stopTimelinePlayback);
+    document.getElementById("timeline-sample").addEventListener("click", loadSampleTimeline);
   </script>
 </body>
 </html>
