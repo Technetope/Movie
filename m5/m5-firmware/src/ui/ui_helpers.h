@@ -9,10 +9,11 @@
 class UiHelpers {
  public:
   void Begin();
-  void DrawHeader(const char* message);
+  void DrawHeader(const char* message, bool small = false);
   void ShowInitResult(ToioController::InitStatus status);
    // スキャン結果（suffix 一覧）のログ＋画面出力
   void LogScanResults(const std::vector<std::string>& suffixes);
+  void SetCustomLabel(const std::string& label);
   void UpdateStatus(const CubePose& pose, bool has_pose, uint8_t battery_level,
                     bool has_battery, float board_voltage,
                     const ToioLedColor& led, const ToioMotorState& motor,
@@ -37,4 +38,5 @@ class UiHelpers {
 
   UiStatus status_{};
   uint32_t last_display_ms_ = 0;
+  std::string custom_label_;
 };

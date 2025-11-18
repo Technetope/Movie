@@ -305,6 +305,14 @@
             <button id="all-status-btn">全台 status-request</button>
           </div>
         </div>
+        <div class="rows">
+          <label>toio操作 (全台)</label>
+          <div class="flex">
+            <button id="all-scan-btn">all scan</button>
+            <button id="all-connect-btn">all connect (suffixはカード/mapping)</button>
+          </div>
+          <span class="hint">接続済みWebSocket全てにscan/接続を一括送信します</span>
+        </div>
       </div>
     </div>
 
@@ -430,6 +438,8 @@
     const deviceListView = document.getElementById("device-list");
     const allStatusBtn = document.getElementById("all-status-btn");
     const allLedBtn = document.getElementById("all-led-btn");
+    const allScanBtn = document.getElementById("all-scan-btn");
+    const allConnectBtn = document.getElementById("all-connect-btn");
 
     const ipSuffixInput = document.getElementById("ip-suffix");
     const portInput = null; // ポート選択は固定
@@ -587,6 +597,7 @@
         suffixInputCard.autocomplete = "off";
         suffixInputCard.dataset.deviceId = id;
         suffixInputCard.dataset.role = "suffix-input";
+        if (conn.toioId) suffixInputCard.value = conn.toioId;
         const connectBtnCard = document.createElement("button");
         connectBtnCard.textContent = "connect";
         connectBtnCard.dataset.deviceAction = "connect-toio";
@@ -724,6 +735,7 @@
       if (!urlInfo) return;
       log(`connecting to ${urlInfo.url}`, "info", id);
       const socket = new WebSocket(urlInfo.url);
+      const mapping = mappingDevices.find((m) => m.id === id);
       const conn = {
         socket,
         subscribed: false,
@@ -734,7 +746,7 @@
         url: urlInfo.url,
         host: urlInfo.host,
         scanText: "scan: -",
-        toioId: null,
+        toioId: mapping?.toioId || null,
         toioConnected: false,
       };
       connections.set(id, conn);
@@ -746,6 +758,8 @@
         log("WebSocket connected", "info", id);
         setGlobalState();
         refreshSelectedStatus();
+        const labelMsg = { type: "display-label", id: `cli-${nextId++}`, label: id };
+        socket.send(JSON.stringify(labelMsg));
       };
 
       socket.onclose = (ev) => {
@@ -782,9 +796,14 @@
         log(`skip connect: ${id} already connected`, "info", id);
         return;
       }
+      const mapping = mappingDevices.find((m) => m.id === id);
       const prevSelected = selectedJsonId;
       selectedJsonId = id;
       deviceIdInput.value = id;
+      if (mapping?.toioId) {
+        const existing = connections.get(id);
+        if (existing) existing.toioId = mapping.toioId;
+      }
       connect(host);
       selectedJsonId = prevSelected;
     }
@@ -1038,7 +1057,8 @@
             ? `${IP_PREFIX}${entry.ip_suffix}`
             : null;
         if (!host) throw new Error(`device ${entry.id}: ip or ip_suffix is required`);
-        parsed.push({ id: entry.id, host });
+        const toioId = typeof entry.toio_id === "string" ? entry.toio_id : null;
+        parsed.push({ id: entry.id, host, toioId });
       }
       return parsed;
     }
@@ -1291,6 +1311,20 @@
       const payload = getLedPayload();
       if (!payload) return;
       sendAll("led", payload);
+    });
+    allScanBtn.addEventListener("click", () => sendAll("scan", {}));
+    allConnectBtn.addEventListener("click", () => {
+      connections.forEach((conn, id) => {
+        const suffix =
+          conn.toioId ||
+          deviceListView.querySelector(`input[data-role="suffix-input"][data-device-id="${id}"]`)?.value.trim() ||
+          "";
+        if (!suffix) {
+          log(`skip connect: ${id} suffix not set`, "error", id);
+          return;
+        }
+        send("connect", { suffix }, id);
+      });
     });
 
     setGlobalState();

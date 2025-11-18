@@ -1,10 +1,19 @@
 {
   "devices": [
-    { "id": "robot_00", "ip_suffix": 165 },
-    { "id": "robot_01", "ip_suffix": 143 },
-    { "id": "robot_02", "ip_suffix": 12 },
-    { "id": "robot_03", "ip_suffix": 13 },
-    { "id": "robot_04", "ip_suffix": 14 },
-    { "id": "robot_05", "ip_suffix": 15 }
+    { "id": "robot_00", "ip_suffix": 165, "toio_id": "R2n" },
+    { "id": "robot_01", "ip_suffix": 143, "toio_id": "D3t" },
+    { "id": "robot_02", "ip_suffix": 199, "toio_id": "Q7B" },
+    { "id": "robot_03", "ip_suffix": 191, "toio_id": "87j" },
+    { "id": "robot_04", "ip_suffix": 144, "toio_id": "d1i" },
+    { "id": "robot_05", "ip_suffix": 114, "toio_id": "t6i" },
+    { "id": "robot_06", "ip_suffix": 230, "toio_id": "c5C" },
+    { "id": "robot_07", "ip_suffix": 110, "toio_id": "p2K" },
+    { "id": "robot_08", "ip_suffix": 145, "toio_id": "j2T" },
+    { "id": "robot_09", "ip_suffix": 134, "toio_id": "38t" },
+    { "id": "robot_10", "ip_suffix": 201, "toio_id": "n3Q" },
+    { "id": "robot_11", "ip_suffix": 158, "toio_id": "k2B" },
+    { "id": "robot_12", "ip_suffix": 112, "toio_id": "A3Q" },
+    { "id": "robot_13", "ip_suffix": 192, "toio_id": "C0p" },
+    { "id": "robot_14", "ip_suffix": 146, "toio_id": "m7d" }
   ]
 }

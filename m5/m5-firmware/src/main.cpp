@@ -25,7 +25,8 @@ WebsocketServer g_server;
 CommandDispatcher g_commands(g_toio);
 WavPlayer g_wav_player;
 ProtocolHandler g_protocol(
-    g_commands, [](const std::string& payload) { return g_server.Send(payload); });
+    g_commands, [](const std::string& payload) { return g_server.Send(payload); },
+    g_ui);
 
 void InitializeM5Hardware() {
   auto cfg = M5.config();
@@ -45,7 +46,7 @@ void InitializeM5Hardware() {
 
   M5.Display.setRotation(3);
   g_ui.Begin();
-  g_ui.DrawHeader("Wi-Fi connecting...");
+  g_ui.DrawHeader("Wi-Fi connecting...", true);
   g_wav_player.Begin();
 }
 }  // namespace
@@ -70,10 +71,9 @@ void setup() {
   configTime(0, 0, "ntp.nict.jp", "pool.ntp.org");
 
   char header[64];
-  snprintf(header, sizeof(header), "WS %s:%u",
-           g_server.local_ip().toString().c_str(),
-           static_cast<unsigned>(kWebsocketPort));
-  g_ui.DrawHeader(header);
+  snprintf(header, sizeof(header), "WS %s",
+           g_server.local_ip().toString().c_str());
+  g_ui.DrawHeader(header, true);
 }
 
 void loop() {

@@ -6,6 +6,8 @@
 #include <cstring>
 #include <vector>
 
+#include "../ui/ui_helpers.h"
+
 namespace {
 constexpr uint32_t kDefaultScanDurationSec = 3;
 
@@ -19,8 +21,8 @@ const char* ReadString(const JsonVariantConst& value) {
 }  // namespace
 
 ProtocolHandler::ProtocolHandler(CommandDispatcher& commands,
-                                 SendCallback sender)
-    : commands_(commands), send_(std::move(sender)) {
+                                 SendCallback sender, UiHelpers& ui)
+    : commands_(commands), send_(std::move(sender)), ui_(ui) {
   commands_.SetTimelineCallback(
       [this](size_t index, const ToioController::TimelineFrame& frame) {
         StaticJsonDocument<192> doc;
@@ -157,6 +159,17 @@ void ProtocolHandler::HandleMessage(const std::string& payload) {
   if (strcmp(type, "goal-clear") == 0) {
     commands_.ClearGoal();
     SendAck("goal-clear-result", id, true);
+    return;
+  }
+
+  if (strcmp(type, "display-label") == 0) {
+    const char* label = ReadString(doc["label"]);
+    if (!label || strlen(label) == 0) {
+      SendError(id, "invalid-label");
+      return;
+    }
+    ui_.SetCustomLabel(label);
+    SendAck("display-label-result", id, true);
     return;
   }
 

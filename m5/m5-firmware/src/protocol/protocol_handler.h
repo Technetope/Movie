@@ -4,12 +4,14 @@
 #include <string>
 
 #include "../commands/command_dispatcher.h"
+#include "../ui/ui_helpers.h"
 
 class ProtocolHandler {
  public:
   using SendCallback = std::function<bool(const std::string&)>;
 
-  ProtocolHandler(CommandDispatcher& commands, SendCallback sender);
+  ProtocolHandler(CommandDispatcher& commands, SendCallback sender,
+                  UiHelpers& ui);
 
   void HandleClientConnected();
   void HandleClientDisconnected();
@@ -30,5 +32,6 @@ class ProtocolHandler {
 
   CommandDispatcher& commands_;
   SendCallback send_;
+  UiHelpers& ui_;
   bool connected_ = false;
 };

@@ -4,8 +4,7 @@
 #include <ctime>
 
 namespace {
-constexpr uint32_t kHeaderTitleY = 14;
-constexpr uint32_t kHeaderMessageY = 30;
+constexpr uint32_t kHeaderTitleY = 20;
 constexpr uint32_t kStatusAreaY = 40;
 }  // namespace
 
@@ -17,17 +16,16 @@ void UiHelpers::Begin() {
   last_display_ms_ = millis();
 }
 
-void UiHelpers::DrawHeader(const char* message) {
+void UiHelpers::DrawHeader(const char* message, bool small) {
   auto& display = M5.Display;
+  const char* text = (message && message[0] != '\0') ? message
+                                                     : "Toio Position Monitor";
   display.fillScreen(BLACK);
   display.setTextDatum(MC_DATUM);
   display.setTextColor(WHITE, BLACK);
-  display.setTextSize(2);
-  display.drawString("toio position monitor", display.width() / 2,
-                     kHeaderTitleY);
+  display.setTextSize(small ? 2 : 3);
+  display.drawString(text, display.width() / 2, kHeaderTitleY);
   display.setTextSize(1);
-  display.drawString(message ? message : "", display.width() / 2,
-                     kHeaderMessageY);
   display.setTextDatum(TL_DATUM);
 }
 
@@ -49,12 +47,12 @@ void UiHelpers::ShowInitResult(ToioController::InitStatus status) {
     case ToioController::InitStatus::kConnectionFailed:
       message = "Connection failed.";
       break;
-    case ToioController::InitStatus::kInvalidArgument:
-    default:
-      message = "Invalid request.";
-      break;
+  case ToioController::InitStatus::kInvalidArgument:
+  default:
+    message = "Invalid request.";
+    break;
   }
-  DrawHeader(message);
+  DrawHeader(message, true);
   M5.Log.println(message);
 }
 
@@ -73,6 +71,11 @@ void UiHelpers::LogScanResults(const std::vector<std::string>& suffixes) {
     M5.Log.printf("  [%zu] suffix=%s\n", i, suffixes[i].c_str());
     display.printf("  [%zu] %s\n", i, suffixes[i].c_str());
   }
+}
+
+void UiHelpers::SetCustomLabel(const std::string& label) {
+  custom_label_ = label;
+  DrawHeader(custom_label_.c_str(), false);
 }
 
 void UiHelpers::UpdateStatus(const CubePose& pose, bool has_pose,
