@@ -1,46 +1,35 @@
-## M5 WebSocketサーバー移行プラン（main.cpp改修方針）
+## 目的
+- タイムラインJSONの`sound`フィールドで指定された音を、埋め込みWAV（8kHz/16bit/mono）として再生できるようにする。
+- ファイルシステムは使わず、`embedded_wav.h` でまとめた配列を参照する。
 
-1) ネットワーク初期化を追加  
-- Wi-Fi接続処理を `setup()` 冒頭に追加（SSID/PASSは定数/シークレット）。  
-- 接続成功後にIPをシリアル/画面へ表示。
+## 方針
+- 出力先は M5StickC Plus2 + SPK HAT2（外部スピーカー）。M5Unified の config で外部スピーカを有効にする。
+- `TimelineFrame` に `sound_id` を追加し、`protocol_handler` の `timeline-load` で `sound` を読み取る（null/未指定は空扱い）。
+- `updateTimelinePlayback()` でフレーム適用時に `sound_id` があれば即再生する。未定義IDはログのみ。
+- 再生中に次の音が来た場合は「後勝ち」で現在の音を停止し、新しい音に差し替える。
+- 出力は `M5.Speaker.playWav(buffer, size, 1, 0, true)` を使用。音量は固定値で開始し、必要なら後日 `gain` フィールドを拡張する。
 
-2) WebSocketサーバーの起動  
-- ライブラリ選定: ArduinoWebsockets（同期poll型、単一クライアント前提でシンプル）。  
-- `setup()` で `server.listen(9000)`、接続時に `hello` を送るハンドラ登録。`loop()` で `server.poll()` を短周期で呼ぶ。
+## 実装タスク
+1) モデル/プロトコル拡張  
+   - `TimelineFrame` に `std::string sound_id;` を追加。  
+   - `protocol_handler::HandleMessage` の `timeline-load` で `sound` をパースしてフレームに格納。
 
-3) JSONパース/生成の準備  
-- ArduinoJsonを使い、共通バッファ（StaticJsonDocument）を用意。  
-- 受信→`type`で分岐→応答を生成、という流れを関数化。
+2) 再生ヘルパー  
+   - `audio` ヘルパー（クラス/名前空間）を追加し、`PlayById(const char* id)` / `Stop()` / `Loop()` を持たせる。  
+   - `embedded_wav.h` の `kEmbeddedWavs` を線形検索し、ヒットしたら `playWav`。ミスならログ。
 
-4) コマンドハンドラ実装（WebSocket/JSON）  
-- `scan`: `g_toio.scan()` 実行 → `scan-result`返却。  
-- `connect`: `connectBySuffix(suffix)` → `connect-result`。  
-- `led` / `motor`: `setLedColor` / `driveMotor` → 成否を即応答。  
-- `goal-set` / `goal-clear`: 既存の目標設定/停止関数呼び出し。  
-- `status-request`: 現状態を単発送信。  
-- `status-subscribe`: 購読フラグON/OFF。`poseDirty`/`batteryDirty`検知で`status`通知。
+3) ループ統合  
+   - `toio_controller::updateTimelinePlayback()` のフレーム適用部分で `PlayById(sound_id)` を呼ぶ。  
+   - `loop()` で `audio.Loop()` を呼び、再生終了時の後処理を行う（必要最低限）。
 
-5) ループ再構成  
-- `g_toio.loop()` とUI更新は維持しつつ、WS受信処理を追加（同期なら `server.poll()`、非同期ならコールバック）。  
-- 購読ON時、dirtyフラグで `status` をプッシュ。  
-- 初期の自動スキャン/接続/テスト送信は不要なら削除し、WSコマンド待ちにする。
+4) クリーンアップ  
+   - クライアント切断や `timeline-stop` 時に `Stop()` を呼んでスピーカを止める。
 
-6) エラーハンドリング  
-- JSONパース失敗・未知 `type` は `error` を返す。  
-- Wi-Fi未接続時は早期リターンか再接続を試行。
+## 動作確認
+- 埋め込み済みの音ID（例: `aurora`, `birds`, `cicada`, `crystal`, `dolphin`, `frog`, `geyser`, `insect`, `reef`）を `sound` に指定したフレームで再生されること。
+- 未定義IDでエラーにならずログだけでスキップされること。
+- 再生中に次の音が来た場合、後勝ちで切り替わること。
 
-7) ディレクトリ構成と疎結合設計  
-- `src/net/`: Wi-Fi接続とWebSocketサーバ起動/pollのみ。プロトコル知識を持たず、受信文字列と送信コールバックでやり取り。  
-- `src/protocol/`: JSONパース/生成と`type`分岐。具体的なtoio制御は`commands`に委譲。  
-- `src/commands/`: toio制御ラッパ（scan/connect/led/motor/goal-set/status購読）。購読状態フラグを保持してレスポンスデータを返す。  
-- `src/ui/`: 表示/ログのみ。状態更新用のメソッドを提供し、ネット/プロトコルには依存しない。  
-- `main.cpp`: 初期化と各モジュールの接着だけに絞る。依存注入（関数ポインタ/インタフェース）でモジュール間の結合を最小化。
-
-8) 実装の具体ステップ  
-- `platformio.ini` に ArduinoWebsockets と ArduinoJson を追加。  
-- `src/net/`, `src/protocol/`, `src/commands/` にヘッダ/ソースひな型を置き、インタフェースを定義する。  
-- `main.cpp`: Wi-Fi接続→WSリッスン→`poll()`呼び出しを追加。IP表示をUIに反映。自動スキャン/接続は外し、WSコマンド待ちへ。  
-- `protocol`: 受信文字列をJSONパースし、`type`で分岐して`commands`を呼ぶ。応答JSONをシリアライズして送信コールバックへ渡す。  
-- `commands`: toio API呼び出し＋購読フラグ管理。`status-request`は単発返却、`status-subscribe` ONでフラグを立てる。  
-- ループ: `g_toio.loop()`＋UI更新＋`server.poll()`＋dirty検知で`status`プッシュ。購読OFFで停止。  
-- 動作確認: `scan`/`connect`/`status-request` から試し、順次 `led`/`motor`/`goal-set` を確認。
+## オープンな決定
+- 音量の固定値と、必要なら `gain` をJSONに追加するかどうか。  
+- 既存のトーンスケジューラを併存させるか置き換えるか（優先順位）。

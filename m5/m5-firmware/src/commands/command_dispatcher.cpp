@@ -63,6 +63,11 @@ void CommandDispatcher::SetTimelineCallback(
   controller_.setTimelineCallback(std::move(cb));
 }
 
+void CommandDispatcher::SetSoundCallback(
+    std::function<void(const std::string&)> cb) {
+  controller_.setSoundCallback(std::move(cb));
+}
+
 void CommandDispatcher::ClearGoal() {
   controller_.clearGoal();
 }

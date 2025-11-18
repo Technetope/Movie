@@ -31,6 +31,7 @@ class CommandDispatcher {
   void StopTimeline(bool clear_goal = true);
   uint64_t EpochMillis() const;
   void SetTimelineCallback(ToioController::TimelineCallback cb);
+  void SetSoundCallback(std::function<void(const std::string&)> cb);
   void ClearGoal();
 
   void SetStatusSubscription(bool enable);

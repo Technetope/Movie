@@ -269,6 +269,9 @@ void ToioController::updateTimelinePlayback() {
                             frame.use_position, frame.use_heading,
                             frame.angle_deg, frame.angle_tolerance);
     }
+    if (!frame.sound_id.empty() && sound_callback_) {
+      sound_callback_(frame.sound_id);
+    }
     if (timeline_callback_) {
       timeline_callback_(timeline_next_index_, frame);
     }

@@ -6,6 +6,7 @@
 
 #include "commands/command_dispatcher.h"
 #include "controller/toio_controller.h"
+#include "audio/wav_player.h"
 #include "net/websocket_server.h"
 #include "protocol/protocol_handler.h"
 #include "ui/ui_helpers.h"
@@ -22,6 +23,7 @@ ToioController g_toio;
 UiHelpers g_ui;
 WebsocketServer g_server;
 CommandDispatcher g_commands(g_toio);
+WavPlayer g_wav_player;
 ProtocolHandler g_protocol(
     g_commands, [](const std::string& payload) { return g_server.Send(payload); });
 
@@ -30,16 +32,29 @@ void InitializeM5Hardware() {
   cfg.clear_display = true;
   cfg.output_power = true;
   cfg.serial_baudrate = 115200;
+  cfg.external_speaker.hat_spk2 = true;  // SPK HAT2 (M5StickC Plus2)
   M5.begin(cfg);
+
+  // Optional: tune speaker sample rate for better sound quality.
+  auto spk_cfg = M5.Speaker.config();
+  if (spk_cfg.use_dac || spk_cfg.buzzer) {
+    spk_cfg.sample_rate = 192000;
+    M5.Speaker.config(spk_cfg);
+  }
+  M5.Speaker.begin();
 
   M5.Display.setRotation(3);
   g_ui.Begin();
   g_ui.DrawHeader("Wi-Fi connecting...");
+  g_wav_player.Begin();
 }
 }  // namespace
 
 void setup() {
   InitializeM5Hardware();
+
+  g_commands.SetSoundCallback(
+      [](const std::string& id) { g_wav_player.PlayById(id); });
 
   const bool net_ok = g_server.Begin(
       kWifiSsid, kWifiPassword, kWebsocketPort,
@@ -65,6 +80,7 @@ void loop() {
   M5.update();
   g_toio.loop();
   g_server.Loop();
+  g_wav_player.Loop();
 
   const bool pose_dirty = g_toio.poseDirty();
   const bool battery_dirty = g_toio.batteryDirty();

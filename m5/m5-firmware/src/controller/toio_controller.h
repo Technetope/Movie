@@ -75,6 +75,7 @@ class ToioController {
     float angle_deg = 0.0f;
     float stop_distance = 20.0f;
     float angle_tolerance = 10.0f;
+    std::string sound_id;
   };
 
   bool loadTimeline(const std::vector<TimelineFrame>& frames);
@@ -83,6 +84,9 @@ class ToioController {
   using TimelineCallback =
       std::function<void(size_t index, const TimelineFrame& frame)>;
   void setTimelineCallback(TimelineCallback cb) { timeline_callback_ = cb; }
+  void setSoundCallback(std::function<void(const std::string&)> cb) {
+    sound_callback_ = std::move(cb);
+  }
   // Returns epoch milliseconds if available, otherwise 0.
   uint64_t epochMillis() const;
 
@@ -126,6 +130,7 @@ class ToioController {
   bool timeline_playing_ = false;
   uint32_t timeline_start_ms_ = 0;
   TimelineCallback timeline_callback_;
+  std::function<void(const std::string&)> sound_callback_;
 
   GoalTracker goal_tracker_;
 };

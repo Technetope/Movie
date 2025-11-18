@@ -301,7 +301,10 @@
           <button id="timeline-stop">停止</button>
           <button id="timeline-sample">サンプル読込</button>
         </div>
-        <p class="hint">write: timeline-load / play: timeline-start(delay_ms)。停止は timeline-stop。</p>
+        <p class="hint">
+          write: timeline-load / play: timeline-start(delay_ms)。停止は timeline-stop。<br>
+          sound を指定する場合は `"sound": "aurora"` などをフレームに入れてください（埋め込みID例: aurora, birds, cicada, crystal, dolphin, frog, geyser, insect, reef）。
+        </p>
       </div>
     </div>
 
@@ -662,6 +665,9 @@
           sd: typeof f.stop_distance === "number" ? f.stop_distance : 20,
           at: typeof f.angle_tolerance === "number" ? f.angle_tolerance : 5,
         };
+        if (typeof f.sound === "string" && f.sound.trim().length > 0) {
+          frame.sound = f.sound;
+        }
         if (up && (!Number.isFinite(frame.x) || !Number.isFinite(frame.y))) {
           log(`frame ${i}: position x/y required`, "error");
           return null;
@@ -732,9 +738,9 @@
     function loadSampleTimeline() {
       const sample = {
         frames: [
-          { time: 0, use_position: true, use_rotation: false, position: { x: 100, y: 100 }, stop_distance: 20 },
-          { time: 5, use_position: true, use_rotation: false, position: { x: 200, y: 200 } },
-          { time: 10, use_position: false, use_rotation: true, rotation: 90, angle_tolerance: 5 },
+          { time: 0, use_position: true, use_rotation: false, position: { x: 100, y: 100 }, stop_distance: 20, sound: "aurora" },
+          { time: 2, use_position: true, use_rotation: false, position: { x: 200, y: 200 }, sound: "frog" },
+          { time: 4, use_position: false, use_rotation: true, rotation: 90, angle_tolerance: 5, sound: "reef" },
         ],
       };
       timelineInput.value = JSON.stringify(sample, null, 2);

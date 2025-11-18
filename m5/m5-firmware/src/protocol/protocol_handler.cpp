@@ -223,6 +223,9 @@ void ProtocolHandler::HandleMessage(const std::string& payload) {
         }
         frame.angle_tolerance = f["at"] | f["angle_tolerance"] | 5.0f;
       }
+      if (f["sound"].is<const char*>()) {
+        frame.sound_id = f["sound"].as<const char*>();
+      }
       frames.push_back(frame);
     }
     const bool ok = commands_.LoadTimeline(frames);
