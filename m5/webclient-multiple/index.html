@@ -479,6 +479,8 @@
 
     const connections = new Map(); // deviceId -> { socket, subscribed, timelineLoaded, lastParsedFrames, status, url, scanText, host, toioId, toioConnected }
     const IP_PREFIX = "192.168.90.";
+    const MAX_TIMELINE_FRAMES = 400; // firmware側上限
+    const MAX_TIMELINE_BYTES = 64 * 1024; // 送信ペイロードの安全上限
     let selectedDeviceId = null;
     let selectedJsonId = null;
     let jsonIds = [];
@@ -1046,6 +1048,60 @@
       return null;
     }
 
+    function validateFramesForSend(frames, labelForLog = "") {
+      if (!Array.isArray(frames)) return false;
+      if (frames.length > MAX_TIMELINE_FRAMES) {
+        log(
+          `timeline-load skipped: frames ${frames.length} > limit ${MAX_TIMELINE_FRAMES}`,
+          "error",
+          labelForLog
+        );
+        return false;
+      }
+      const payloadSize = JSON.stringify({ frames }).length;
+      if (payloadSize > MAX_TIMELINE_BYTES) {
+        log(
+          `timeline-load skipped: payload ${payloadSize} bytes exceeds limit ${MAX_TIMELINE_BYTES}`,
+          "error",
+          labelForLog
+        );
+        return false;
+      }
+      return true;
+    }
+
+    function toCompactFrame(frame) {
+      const up = !!frame.up;
+      const ur = !!frame.ur;
+      const flags = (up ? 1 : 0) | (ur ? 2 : 0);
+      const arr = [
+        Number(frame.t),
+        flags,
+        up ? Number(frame.x) : 0,
+        up ? Number(frame.y) : 0,
+        ur ? Number(frame.ang) : 0,
+        typeof frame.sd === "number" ? Number(frame.sd) : 20,
+        typeof frame.at === "number" ? Number(frame.at) : 5,
+        typeof frame.sound === "string" && frame.sound.trim().length > 0
+          ? frame.sound.trim()
+          : null,
+      ];
+      while (arr.length > 2) {
+        const idx = arr.length - 1;
+        const v = arr[idx];
+        const isDefault =
+          v === null ||
+          (idx === 6 && typeof v === "number" && v === 5) ||
+          (idx === 5 && typeof v === "number" && v === 20) ||
+          (idx === 4 && !ur && typeof v === "number" && v === 0) ||
+          (idx === 3 && !up && typeof v === "number" && v === 0) ||
+          (idx === 2 && !up && typeof v === "number" && v === 0);
+        if (!isDefault) break;
+        arr.pop();
+      }
+      return arr;
+    }
+
     function parseMappingList(list) {
       const parsed = [];
       for (const entry of list) {
@@ -1129,6 +1185,10 @@
       }
       renderJsonIdToggles();
       multi.forEach((frames, id) => {
+        const compactFrames = frames.map(toCompactFrame);
+        if (!validateFramesForSend(compactFrames, id)) {
+          return;
+        }
         const conn = connections.get(id);
         if (!conn || !conn.socket || conn.socket.readyState !== WebSocket.OPEN) {
           log(`skip timeline-load: ${id} not connected`, "error", id);
@@ -1136,7 +1196,7 @@
         }
         conn.timelineLoaded = false;
         conn.lastParsedFrames = frames;
-        send("timeline-load", { frames }, id);
+        send("timeline-load", { frames: compactFrames }, id);
       });
     }
 

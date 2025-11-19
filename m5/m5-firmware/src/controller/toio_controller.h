@@ -123,7 +123,8 @@ class ToioController {
 
   uint32_t scan_duration_sec_ = 0;
 
-  static constexpr size_t kMaxTimelineFrames = 240;
+  // Maximum number of frames that can be preloaded for a timeline.
+  static constexpr size_t kMaxTimelineFrames = 400;
   std::array<TimelineFrame, kMaxTimelineFrames> timeline_frames_{};
   size_t timeline_count_ = 0;
   size_t timeline_next_index_ = 0;

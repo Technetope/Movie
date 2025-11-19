@@ -3,6 +3,7 @@
 #include <ArduinoJson.h>
 #include <esp_system.h>
 #include <M5Unified.h>
+#include <cstdint>
 #include <cstring>
 #include <vector>
 
@@ -10,6 +11,7 @@
 
 namespace {
 constexpr uint32_t kDefaultScanDurationSec = 3;
+constexpr size_t kTimelineFrameLimit = 400;  // to match ToioController
 
 // Utility to read optional string field.
 const char* ReadString(const JsonVariantConst& value) {
@@ -17,6 +19,105 @@ const char* ReadString(const JsonVariantConst& value) {
     return value.as<const char*>();
   }
   return nullptr;
+}
+}  // namespace
+
+namespace {
+bool ParseTimelineFrame(const JsonVariantConst& f,
+                        ToioController::TimelineFrame* out) {
+  if (!out) return false;
+  ToioController::TimelineFrame frame;
+  frame.stop_distance = 20.0f;
+  frame.angle_tolerance = 5.0f;
+
+  if (f.is<JsonArrayConst>()) {
+    JsonArrayConst arr = f.as<JsonArrayConst>();
+    if (arr.isNull()) {
+      return false;
+    }
+    if (arr.size() < 2) {
+      return false;
+    }
+    JsonVariantConst v_time = arr[0];
+    if (!v_time.is<float>()) {
+      return false;
+    }
+    frame.time_s = v_time.as<float>();
+
+    JsonVariantConst v_flags = arr[1];
+    if (!v_flags.is<uint32_t>() && !v_flags.is<int>()) {
+      return false;
+    }
+    const uint32_t flags = v_flags.as<uint32_t>();
+    frame.use_position = (flags & 0x1) != 0;
+    frame.use_heading = (flags & 0x2) != 0;
+
+    if (frame.use_position) {
+      if (arr.size() <= 3 || !arr[2].is<float>() || !arr[3].is<float>()) {
+        return false;
+      }
+      frame.x = arr[2];
+      frame.y = arr[3];
+      if (arr.size() > 5 && arr[5].is<float>()) {
+        frame.stop_distance = arr[5];
+      }
+    }
+    if (frame.use_heading) {
+      if (arr.size() <= 4 || !arr[4].is<float>()) {
+        return false;
+      }
+      frame.angle_deg = arr[4];
+      if (arr.size() > 6 && arr[6].is<float>()) {
+        frame.angle_tolerance = arr[6];
+      }
+    }
+    if (arr.size() > 7 && arr[7].is<const char*>()) {
+      frame.sound_id = arr[7].as<const char*>();
+    }
+    *out = frame;
+    return true;
+  }
+
+  const bool use_position = f["up"] | f["use_position"] | false;
+  const bool use_heading =
+      f["ur"] | f["use_rotation"] | f["uh"] | f["use_heading"] | false;
+  float time_s = 0.0f;
+  if (f["t"].is<float>()) {
+    time_s = f["t"];
+  } else if (f["time"].is<float>()) {
+    time_s = f["time"];
+  } else {
+    return false;
+  }
+
+  frame.time_s = time_s;
+  frame.use_position = use_position;
+  frame.use_heading = use_heading;
+  if (use_position) {
+    if (!f["x"].is<float>() || !f["y"].is<float>()) {
+      return false;
+    }
+    frame.x = f["x"];
+    frame.y = f["y"];
+    frame.stop_distance = f["sd"] | f["stop_distance"] | 20.0f;
+  }
+  if (use_heading) {
+    if (f["rotation"].is<float>()) {
+      frame.angle_deg = f["rotation"];
+    } else if (f["ang"].is<float>()) {
+      frame.angle_deg = f["ang"];
+    } else if (f["angle"].is<float>()) {
+      frame.angle_deg = f["angle"];
+    } else {
+      return false;
+    }
+    frame.angle_tolerance = f["at"] | f["angle_tolerance"] | 5.0f;
+  }
+  if (f["sound"].is<const char*>()) {
+    frame.sound_id = f["sound"].as<const char*>();
+  }
+  *out = frame;
+  return true;
 }
 }  // namespace
 
@@ -55,8 +156,8 @@ void ProtocolHandler::HandleClientDisconnected() {
 }
 
 void ProtocolHandler::HandleMessage(const std::string& payload) {
-  // Increased capacity to allow large timeline-load (up to ~240 frames).
-  StaticJsonDocument<16384> doc;
+  // Increased capacity to allow larger timeline-load (up to ~400 frames).
+  DynamicJsonDocument doc(32768);
   const auto err = deserializeJson(doc, payload);
   const char* id = doc["id"];
   if (err) {
@@ -203,48 +304,19 @@ void ProtocolHandler::HandleMessage(const std::string& payload) {
       SendError(id, "invalid-timeline");
       return;
     }
+    auto frames_json = doc["frames"].as<JsonArray>();
+    const size_t frame_count = frames_json.size();
+    if (frame_count == 0 || frame_count > kTimelineFrameLimit) {
+      SendError(id, "invalid-timeline");
+      return;
+    }
     std::vector<ToioController::TimelineFrame> frames;
-    for (const auto& f : doc["frames"].as<JsonArray>()) {
-      const bool use_position = f["up"] | f["use_position"] | false;
-      const bool use_heading =
-          f["ur"] | f["use_rotation"] | f["uh"] | f["use_heading"] | false;
-      float time_s = 0.0f;
-      if (f["t"].is<float>()) {
-        time_s = f["t"];
-      } else if (f["time"].is<float>()) {
-        time_s = f["time"];
-      } else {
+    frames.reserve(frame_count);
+    for (const auto& f : frames_json) {
+      ToioController::TimelineFrame frame;
+      if (!ParseTimelineFrame(f, &frame)) {
         SendError(id, "invalid-timeline");
         return;
-      }
-      ToioController::TimelineFrame frame;
-      frame.time_s = time_s;
-      frame.use_position = use_position;
-      frame.use_heading = use_heading;
-      if (use_position) {
-        if (!f["x"].is<float>() || !f["y"].is<float>()) {
-          SendError(id, "invalid-timeline");
-          return;
-        }
-        frame.x = f["x"];
-        frame.y = f["y"];
-        frame.stop_distance = f["sd"] | f["stop_distance"] | 20.0f;
-      }
-      if (use_heading) {
-        if (f["rotation"].is<float>()) {
-          frame.angle_deg = f["rotation"];
-        } else if (f["ang"].is<float>()) {
-          frame.angle_deg = f["ang"];
-        } else if (f["angle"].is<float>()) {
-          frame.angle_deg = f["angle"];
-        } else {
-          SendError(id, "invalid-timeline");
-          return;
-        }
-        frame.angle_tolerance = f["at"] | f["angle_tolerance"] | 5.0f;
-      }
-      if (f["sound"].is<const char*>()) {
-        frame.sound_id = f["sound"].as<const char*>();
       }
       frames.push_back(frame);
     }

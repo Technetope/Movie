@@ -14,6 +14,11 @@
     { "id": "robot_11", "ip_suffix": 158, "toio_id": "k2B" },
     { "id": "robot_12", "ip_suffix": 112, "toio_id": "A3Q" },
     { "id": "robot_13", "ip_suffix": 192, "toio_id": "C0p" },
-    { "id": "robot_14", "ip_suffix": 146, "toio_id": "m7d" }
+    { "id": "robot_14", "ip_suffix": 146, "toio_id": "m7d" },
+    { "id": "robot_15", "ip_suffix": 136, "toio_id": "83T" },
+    { "id": "robot_16", "ip_suffix": 119, "toio_id": "M1F" },
+    { "id": "robot_17", "ip_suffix": 206, "toio_id": "p84" },
+    { "id": "robot_18", "ip_suffix": 200, "toio_id": "56f" },
+    { "id": "robot_19", "ip_suffix": 202, "toio_id": "F3H" }
   ]
 }
