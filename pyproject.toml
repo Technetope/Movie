@@ -1,0 +1,29 @@
+[project]
+name = "movie-simulator"
+version = "0.1.0"
+description = "Offline simulator that renders robot trajectories from quadrant JSON."
+readme = "README_simulator.md"
+requires-python = ">=3.10"
+authors = [{ name = "Movie Project" }]
+dependencies = [
+    "matplotlib>=3.9",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3",
+]
+
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = ["pytest>=8.3"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["simulator"]
+
+[tool.hatch.build.targets.sdist]
+include = ["simulator", "tests", "README_simulator.md", "README.md", "pyproject.toml"]
+

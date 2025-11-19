@@ -1,0 +1,942 @@
+{
+  "frames": [
+    {
+      "time": 0.0,
+      "x": 664.973,
+      "y": 412.035,
+      "rotation": 90.0,
+      "use_position": true,
+      "use_rotation": true,
+      "sound": null,
+      "stop_distance": 20.0,
+      "angle_tolerance": 5.0
+    },
+    {
+      "time": 0.5,
+      "x": 664.973,
+      "y": 412.035,
+      "rotation": 90.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 1.0,
+      "x": 683.128,
+      "y": 412.035,
+      "rotation": 90.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 1.5,
+      "x": 701.284,
+      "y": 412.035,
+      "rotation": 90.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 2.0,
+      "x": 719.439,
+      "y": 412.035,
+      "rotation": 90.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 2.5,
+      "x": 737.595,
+      "y": 412.035,
+      "rotation": 90.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 3.0,
+      "x": 755.75,
+      "y": 412.035,
+      "rotation": 90.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 3.5,
+      "x": 773.905,
+      "y": 412.035,
+      "rotation": 90.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 4.0,
+      "x": 792.061,
+      "y": 412.035,
+      "rotation": 90.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 4.5,
+      "x": 810.216,
+      "y": 412.035,
+      "rotation": 90.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 5.0,
+      "x": 828.372,
+      "y": 412.035,
+      "rotation": 90.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 5.5,
+      "x": 846.527,
+      "y": 412.035,
+      "rotation": 90.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 6.0,
+      "x": 864.683,
+      "y": 412.035,
+      "rotation": 90.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 6.5,
+      "x": 882.838,
+      "y": 412.035,
+      "rotation": 90.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 7.0,
+      "x": 899.0,
+      "y": 412.035,
+      "rotation": 90.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 7.5,
+      "x": 899.0,
+      "y": 412.035,
+      "rotation": 90.0,
+      "use_position": false,
+      "use_rotation": true,
+      "sound": null,
+      "angle_tolerance": 5.0
+    },
+    {
+      "time": 8.0,
+      "x": 899.0,
+      "y": 412.035,
+      "rotation": 112.5,
+      "use_position": false,
+      "use_rotation": true,
+      "sound": null,
+      "angle_tolerance": 5.0
+    },
+    {
+      "time": 8.5,
+      "x": 899.0,
+      "y": 412.035,
+      "rotation": 135.0,
+      "use_position": false,
+      "use_rotation": true,
+      "sound": null,
+      "angle_tolerance": 5.0
+    },
+    {
+      "time": 9.0,
+      "x": 899.0,
+      "y": 412.035,
+      "rotation": 157.5,
+      "use_position": false,
+      "use_rotation": true,
+      "sound": null,
+      "angle_tolerance": 5.0
+    },
+    {
+      "time": 9.5,
+      "x": 899.0,
+      "y": 412.035,
+      "rotation": 180.0,
+      "use_position": false,
+      "use_rotation": false,
+      "sound": null
+    },
+    {
+      "time": 10.0,
+      "x": 899.0,
+      "y": 412.035,
+      "rotation": 180.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 10.5,
+      "x": 899.0,
+      "y": 430.204,
+      "rotation": 180.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 11.0,
+      "x": 899.0,
+      "y": 448.372,
+      "rotation": 180.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 11.5,
+      "x": 899.0,
+      "y": 466.541,
+      "rotation": 180.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 12.0,
+      "x": 899.0,
+      "y": 484.709,
+      "rotation": 180.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 12.5,
+      "x": 899.0,
+      "y": 502.878,
+      "rotation": 180.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 13.0,
+      "x": 899.0,
+      "y": 521.047,
+      "rotation": 180.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 13.5,
+      "x": 899.0,
+      "y": 539.215,
+      "rotation": 180.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 14.0,
+      "x": 899.0,
+      "y": 557.384,
+      "rotation": 180.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 14.5,
+      "x": 899.0,
+      "y": 575.552,
+      "rotation": 180.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 15.0,
+      "x": 899.0,
+      "y": 593.721,
+      "rotation": 180.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 15.5,
+      "x": 899.0,
+      "y": 611.89,
+      "rotation": 180.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 16.0,
+      "x": 899.0,
+      "y": 630.058,
+      "rotation": 180.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 16.5,
+      "x": 899.0,
+      "y": 648.227,
+      "rotation": 180.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 17.0,
+      "x": 899.0,
+      "y": 666.395,
+      "rotation": 180.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 17.5,
+      "x": 899.0,
+      "y": 684.564,
+      "rotation": 180.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 18.0,
+      "x": 899.0,
+      "y": 702.733,
+      "rotation": 180.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 18.5,
+      "x": 899.0,
+      "y": 720.901,
+      "rotation": 180.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 19.0,
+      "x": 899.0,
+      "y": 739.07,
+      "rotation": 180.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 19.5,
+      "x": 899.0,
+      "y": 757.238,
+      "rotation": 180.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 20.0,
+      "x": 899.0,
+      "y": 775.407,
+      "rotation": 180.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 20.5,
+      "x": 899.0,
+      "y": 793.576,
+      "rotation": 180.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 21.0,
+      "x": 899.0,
+      "y": 811.744,
+      "rotation": 180.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 21.5,
+      "x": 899.0,
+      "y": 829.913,
+      "rotation": 180.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 22.0,
+      "x": 899.0,
+      "y": 848.0,
+      "rotation": 180.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 22.5,
+      "x": 899.0,
+      "y": 848.0,
+      "rotation": 180.0,
+      "use_position": false,
+      "use_rotation": true,
+      "sound": null,
+      "angle_tolerance": 5.0
+    },
+    {
+      "time": 23.0,
+      "x": 899.0,
+      "y": 848.0,
+      "rotation": 202.5,
+      "use_position": false,
+      "use_rotation": true,
+      "sound": null,
+      "angle_tolerance": 5.0
+    },
+    {
+      "time": 23.5,
+      "x": 899.0,
+      "y": 848.0,
+      "rotation": 225.0,
+      "use_position": false,
+      "use_rotation": true,
+      "sound": null,
+      "angle_tolerance": 5.0
+    },
+    {
+      "time": 24.0,
+      "x": 899.0,
+      "y": 848.0,
+      "rotation": 247.5,
+      "use_position": false,
+      "use_rotation": true,
+      "sound": null,
+      "angle_tolerance": 5.0
+    },
+    {
+      "time": 24.5,
+      "x": 899.0,
+      "y": 848.0,
+      "rotation": 270.0,
+      "use_position": false,
+      "use_rotation": false,
+      "sound": null
+    },
+    {
+      "time": 25.0,
+      "x": 899.0,
+      "y": 848.0,
+      "rotation": 270.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 25.5,
+      "x": 880.845,
+      "y": 848.0,
+      "rotation": 270.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 26.0,
+      "x": 862.689,
+      "y": 848.0,
+      "rotation": 270.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 26.5,
+      "x": 844.534,
+      "y": 848.0,
+      "rotation": 270.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 27.0,
+      "x": 826.378,
+      "y": 848.0,
+      "rotation": 270.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 27.5,
+      "x": 808.223,
+      "y": 848.0,
+      "rotation": 270.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 28.0,
+      "x": 790.068,
+      "y": 848.0,
+      "rotation": 270.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 28.5,
+      "x": 771.912,
+      "y": 848.0,
+      "rotation": 270.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 29.0,
+      "x": 753.757,
+      "y": 848.0,
+      "rotation": 270.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 29.5,
+      "x": 735.601,
+      "y": 848.0,
+      "rotation": 270.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 30.0,
+      "x": 717.446,
+      "y": 848.0,
+      "rotation": 270.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 30.5,
+      "x": 699.29,
+      "y": 848.0,
+      "rotation": 270.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 31.0,
+      "x": 681.135,
+      "y": 848.0,
+      "rotation": 270.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 31.5,
+      "x": 664.973,
+      "y": 848.0,
+      "rotation": 270.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 32.0,
+      "x": 664.973,
+      "y": 848.0,
+      "rotation": 270.0,
+      "use_position": false,
+      "use_rotation": true,
+      "sound": null,
+      "angle_tolerance": 5.0
+    },
+    {
+      "time": 32.5,
+      "x": 664.973,
+      "y": 848.0,
+      "rotation": 292.5,
+      "use_position": false,
+      "use_rotation": true,
+      "sound": null,
+      "angle_tolerance": 5.0
+    },
+    {
+      "time": 33.0,
+      "x": 664.973,
+      "y": 848.0,
+      "rotation": 315.0,
+      "use_position": false,
+      "use_rotation": true,
+      "sound": null,
+      "angle_tolerance": 5.0
+    },
+    {
+      "time": 33.5,
+      "x": 664.973,
+      "y": 848.0,
+      "rotation": 337.5,
+      "use_position": false,
+      "use_rotation": true,
+      "sound": null,
+      "angle_tolerance": 5.0
+    },
+    {
+      "time": 34.0,
+      "x": 664.973,
+      "y": 848.0,
+      "rotation": 0.0,
+      "use_position": false,
+      "use_rotation": false,
+      "sound": null
+    },
+    {
+      "time": 34.5,
+      "x": 664.973,
+      "y": 848.0,
+      "rotation": 0.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 35.0,
+      "x": 664.973,
+      "y": 829.831,
+      "rotation": 0.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 35.5,
+      "x": 664.973,
+      "y": 811.663,
+      "rotation": 0.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 36.0,
+      "x": 664.973,
+      "y": 793.494,
+      "rotation": 0.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 36.5,
+      "x": 664.973,
+      "y": 775.326,
+      "rotation": 0.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 37.0,
+      "x": 664.973,
+      "y": 757.157,
+      "rotation": 0.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 37.5,
+      "x": 664.973,
+      "y": 738.988,
+      "rotation": 0.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 38.0,
+      "x": 664.973,
+      "y": 720.82,
+      "rotation": 0.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 38.5,
+      "x": 664.973,
+      "y": 702.651,
+      "rotation": 0.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 39.0,
+      "x": 664.973,
+      "y": 684.483,
+      "rotation": 0.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 39.5,
+      "x": 664.973,
+      "y": 666.314,
+      "rotation": 0.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 40.0,
+      "x": 664.973,
+      "y": 648.145,
+      "rotation": 0.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 40.5,
+      "x": 664.973,
+      "y": 629.977,
+      "rotation": 0.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 41.0,
+      "x": 664.973,
+      "y": 611.808,
+      "rotation": 0.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 41.5,
+      "x": 664.973,
+      "y": 593.64,
+      "rotation": 0.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 42.0,
+      "x": 664.973,
+      "y": 575.471,
+      "rotation": 0.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 42.5,
+      "x": 664.973,
+      "y": 557.302,
+      "rotation": 0.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 43.0,
+      "x": 664.973,
+      "y": 539.134,
+      "rotation": 0.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 43.5,
+      "x": 664.973,
+      "y": 520.965,
+      "rotation": 0.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 44.0,
+      "x": 664.973,
+      "y": 502.797,
+      "rotation": 0.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 44.5,
+      "x": 664.973,
+      "y": 484.628,
+      "rotation": 0.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 45.0,
+      "x": 664.973,
+      "y": 466.459,
+      "rotation": 0.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 45.5,
+      "x": 664.973,
+      "y": 448.291,
+      "rotation": 0.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 46.0,
+      "x": 664.973,
+      "y": 430.122,
+      "rotation": 0.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    },
+    {
+      "time": 46.5,
+      "x": 664.973,
+      "y": 412.035,
+      "rotation": 0.0,
+      "use_position": true,
+      "use_rotation": false,
+      "sound": null,
+      "stop_distance": 20.0
+    }
+  ]
+}

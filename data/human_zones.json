@@ -1,0 +1,14 @@
+[
+  { "start": 80.0, "end": 85.0, "center": "Q2", "radius": 150.0, "strength": 1.0 },
+  { "start": 85.0, "end": 88.0, "center": "Q4", "radius": 150.0, "strength": 1.0 },
+  { "start": 88.0, "end": 90.0, "center": "Q3", "radius": 150.0, "strength": 1.0 },
+  { "start": 90.0, "end": 105.0, "center": "Center", "radius": 150.0, "strength": 1.0 },
+  { "start": 105.0, "end": 107.0, "center": "Q1", "radius": 150.0, "strength": 1.0 },
+  { "start": 107.0, "end": 108.0, "center": "Q4", "radius": 150.0, "strength": 1.0 },
+  { "start": 108.0, "end": 110.0, "center": "Q3", "radius": 150.0, "strength": 1.0 },
+  { "start": 110.0, "end": 112.0, "center": "Q1", "radius": 150.0, "strength": 1.0 },
+  { "start": 112.0, "end": 116.0, "center": "Q2", "radius": 150.0, "strength": 1.0 },
+  { "start": 116.0, "end": 116.5, "center": "Center", "radius": 150.0, "strength": 1.0 },
+  { "start": 116.5, "end": 120.0, "center": "Q4", "radius": 150.0, "strength": 1.0 }
+]
+
