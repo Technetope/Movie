@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>M5 toio WebSocket クライアント (multi)</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #0f172a;
+      --panel: #111827;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --danger: #f87171;
+      --border: #1f2937;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    h1 { font-size: 1.4rem; margin: 0 0 12px; }
+    h2 { font-size: 1.1rem; margin: 0 0 10px; }
+    p { margin: 0 0 12px; color: var(--muted); }
+    label { display: block; font-size: 0.9rem; color: var(--muted); margin-bottom: 4px; }
+    input, button, select {
+      font: inherit;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: #0b1220;
+      color: var(--text);
+    }
+    button {
+      background: #1e293b;
+      border-color: #334155;
+      cursor: pointer;
+      transition: transform 0.05s ease, background 0.2s ease;
+    }
+    button:hover { background: #0ea5e9; color: #0b1220; }
+    button:active { transform: translateY(1px); }
+    button[disabled] { opacity: 0.5; cursor: not-allowed; }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      display: grid;
+      gap: 16px;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 12px;
+    }
+    .flex {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .rows { display: grid; gap: 10px; }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #1f2937;
+      border: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--muted);
+    }
+    .dot.ok { background: #22c55e; }
+    .dot.bad { background: #f87171; }
+    .log {
+      padding: 10px;
+      background: #0b1220;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      min-height: 240px;
+      max-height: 360px;
+      overflow: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+    textarea {
+      width: 100%;
+      min-height: 180px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #0b1220;
+      color: var(--text);
+      padding: 10px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+    .small { font-size: 0.9rem; color: var(--muted); }
+    .row-inputs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 8px;
+    }
+    .pill { padding: 2px 8px; border-radius: 999px; border: 1px solid var(--border); background: #0b1220; }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .hint { color: var(--muted); font-size: 0.85rem; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .device-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .device-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      background: #0b1220;
+      display: grid;
+      gap: 10px;
+    }
+    .device-card h3 {
+      margin: 0;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: space-between;
+    }
+    .card-details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 6px 12px;
+    }
+    .badge {
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+    .badge.ok { color: #22c55e; border-color: #22c55e33; }
+    .badge.bad { color: #f87171; border-color: #f8717133; }
+    .toggle-list { display: flex; flex-wrap: wrap; gap: 8px; }
+    .toggle {
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #0b1220;
+      color: var(--text);
+      cursor: pointer;
+    }
+    .toggle.active {
+      background: #0ea5e9;
+      color: #0b1220;
+      border-color: #38bdf8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="panel">
+      <div class="section-header">
+        <h2>シナリオ(JSON)読み込み</h2>
+        <span class="hint">最初にJSONを貼り付けて反映します。idがデバイス選択トグルに並びます。</span>
+      </div>
+      <div class="rows">
+        <textarea id="timeline-input" spellcheck="false" placeholder='{"sets":[{"id":"toioA","frames":[...]},{"id":"toioB","frames":[...]}]}'></textarea>
+        <div class="row-inputs">
+          <input id="timeline-delay" type="number" min="0" step="100" placeholder="start delay ms (default 0)">
+          <input id="timeline-start-offset" type="number" min="0" step="0.1" placeholder="start offset seconds (optional)">
+        </div>
+        <div class="flex">
+          <button id="apply-json-btn">JSONを反映</button>
+          <button id="timeline-load-btn">書き込み</button>
+          <button id="timeline-start-btn">再生</button>
+          <button id="timeline-init-btn">初期位置へ</button>
+          <button id="timeline-stop">停止</button>
+          <button id="timeline-sample">サンプル読込</button>
+        </div>
+        <p class="hint">
+          書き込み/再生/初期位置/停止はJSONに含まれる全idへ同時に送信します。サンプルはsets形式です。
+        </p>
+        <div class="rows">
+          <label>JSONのidからデバイス選択</label>
+          <div id="json-id-list" class="toggle-list"></div>
+          <span class="hint">接続ボタンで使用するデバイス名になります。選択してからIPを入力してください。</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h1>M5 toio WebSocket クライアント (複数台)</h1>
+      <p>ラベルを付けて複数のM5へWebSocket接続し、操作対象を選んでコマンドを送信します。</p>
+      <div class="grid-2">
+        <div class="rows">
+          <div class="section-header">
+            <h2>接続</h2>
+            <span class="status-badge" id="ws-state">
+              <span class="dot" id="ws-dot"></span>
+              <span id="ws-label">0 devices</span>
+            </span>
+          </div>
+          <div class="rows">
+            <div class="row-inputs">
+              <div>
+                <label for="device-id">デバイス名</label>
+                <input id="device-id" type="text" placeholder="toio1" autocomplete="off">
+              </div>
+              <div>
+                <label for="ip-suffix">IP末尾 (固定 192.168.90.xx)</label>
+                <input id="ip-suffix" type="number" min="1" max="254" placeholder="10" autocomplete="off">
+              </div>
+            </div>
+            <div class="flex">
+              <button id="connect-btn">接続</button>
+              <button id="disconnect-btn" disabled>選択デバイスを切断</button>
+              <span class="hint">IPは 192.168.90.xx を前提。デバイス名は上部トグルから選択してください。</span>
+            </div>
+            <div class="rows">
+              <label>外部ファイルで一括接続（id と IP を紐付け）</label>
+              <div class="flex">
+                <input id="mapping-file" type="file" accept="application/json">
+                <button id="mapping-load-btn">読み込み</button>
+                <button id="mapping-connect-btn">一括接続</button>
+              </div>
+              <span class="hint" id="mapping-status">not loaded</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="rows">
+          <div class="section-header">
+            <h2>現在の状態（選択中）</h2>
+            <span class="pill mono" id="hello-pill" title="hello受信状況">hello: -</span>
+          </div>
+          <div class="rows small">
+            <div class="flex">
+              <span class="status-badge">
+                <span class="dot" id="cube-dot"></span>
+                <span>Cube 接続</span>
+              </span>
+              <span class="pill" id="goal-pill">goal inactive</span>
+              <span class="pill" id="subscribe-pill">subscribe: off</span>
+            </div>
+            <div>Pose: <span class="mono" id="pose-text">-</span></div>
+            <div>Battery: <span class="mono" id="batt-text">-</span></div>
+            <div>Board V: <span class="mono" id="boardv-text">-</span></div>
+            <div>LED: <span class="mono" id="led-text">-</span></div>
+            <div>Motor: <span class="mono" id="motor-text">-</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="section-header">
+        <h2>デバイス一覧</h2>
+        <span class="hint">接続中/切断を一覧表示</span>
+      </div>
+      <div class="device-list" id="device-list"></div>
+    </div>
+
+    <div class="panel">
+      <div class="section-header">
+        <h2>全体コマンド</h2>
+        <span class="hint">接続中の全デバイスに送信</span>
+      </div>
+      <div class="rows">
+        <div class="rows">
+          <label>LED (全台)</label>
+          <div class="row-inputs">
+            <input id="led-r" type="number" min="0" max="255" placeholder="r">
+            <input id="led-g" type="number" min="0" max="255" placeholder="g">
+            <input id="led-b" type="number" min="0" max="255" placeholder="b">
+          </div>
+          <div class="flex">
+            <button id="all-led-btn">全台 set led</button>
+            <span class="hint">同じ値を全デバイスへ送信します</span>
+          </div>
+        </div>
+        <div class="rows">
+          <label>ステータス (全台)</label>
+          <div class="flex">
+            <button id="all-status-btn">全台 status-request</button>
+          </div>
+        </div>
+        <div class="rows">
+          <label>toio操作 (全台)</label>
+          <div class="flex">
+            <button id="all-scan-btn">all scan</button>
+            <button id="all-connect-btn">all connect (suffixはカード/mapping)</button>
+          </div>
+          <span class="hint">接続済みWebSocket全てにscan/接続を一括送信します</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="section-header">
+        <h2>コマンド</h2>
+        <span class="hint">送信時に自動で <span class="mono">id</span> を付与します。選択中デバイスへ送信。</span>
+      </div>
+      <div class="grid-2">
+        <div class="rows">
+          <div class="flex">
+            <button data-action="scan">scan</button>
+            <span class="hint" id="scan-result">scan-result: -</span>
+          </div>
+          <div class="rows">
+            <label for="suffix">connect (suffix)</label>
+            <div class="flex">
+              <input id="suffix" type="text" placeholder="A3Q" autocomplete="off">
+              <button data-action="connect">connect</button>
+            </div>
+            <span class="hint">toioの末尾3文字を指定</span>
+          </div>
+          <div class="rows">
+            <label>disconnect</label>
+            <button data-action="disconnect">disconnect</button>
+            <span class="hint">選択デバイスの toio から切断</span>
+          </div>
+          <div class="rows">
+            <label>status</label>
+            <div class="flex">
+              <button data-action="status-request">status-request</button>
+              <button data-action="subscribe-toggle">subscribe on/off</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="rows">
+          <div class="rows">
+            <label>led (選択デバイス)</label>
+            <div class="hint">上部「全体コマンド」のLED入力値を使用します</div>
+            <button data-action="led">set led</button>
+          </div>
+
+          <div class="rows">
+            <label>motor (-100..100)</label>
+            <div class="row-inputs">
+              <input id="motor-left" type="number" min="-100" max="100" placeholder="left">
+              <input id="motor-right" type="number" min="-100" max="100" placeholder="right">
+            </div>
+            <button data-action="motor">drive motor</button>
+          </div>
+
+          <div class="rows">
+            <label>goal-set</label>
+            <div class="row-inputs">
+              <input id="goal-x" type="number" step="1" placeholder="x">
+              <input id="goal-y" type="number" step="1" placeholder="y">
+              <input id="goal-stop" type="number" step="1" placeholder="stop distance (default 20)" value="20">
+              <input id="goal-angle" type="number" step="1" placeholder="angle (deg)">
+              <input id="goal-angle-tol" type="number" step="1" placeholder="angle tol (deg, default 5)" value="5">
+            </div>
+            <div class="hint">
+              x/y:目標座標, stop:到達判定距離, angle:目標角度deg, angle tol:角度許容deg
+            </div>
+            <div class="flex">
+              <label><input id="goal-use-pos" type="checkbox" checked> use_position</label>
+              <label><input id="goal-use-rot" type="checkbox"> use_rotation</label>
+            </div>
+            <div class="flex">
+              <button data-action="goal-set">set goal</button>
+              <button data-action="goal-clear">goal-clear</button>
+            </div>
+          </div>
+
+          <div class="rows">
+            <label>goal-tuning</label>
+            <div class="row-inputs">
+              <input id="tune-vmax" type="number" step="1" placeholder="vmax (default 70)" value="70">
+              <input id="tune-wmax" type="number" step="1" placeholder="wmax (default 60)" value="60">
+              <input id="tune-kr" type="number" step="0.1" placeholder="k_r (default 0.5)" value="0.5">
+              <input id="tune-ka" type="number" step="0.1" placeholder="k_a (default 1.2)" value="1.2">
+              <input id="tune-rev-th" type="number" step="1" placeholder="reverse threshold deg (default 90)" value="90">
+              <input id="tune-rev-hys" type="number" step="1" placeholder="reverse hysteresis deg (default 10)" value="10">
+            </div>
+            <div class="hint">
+              vmax:並進上限, wmax:回転上限, k_r/k_a:比例ゲイン, reverse*:後退モードのしきい値/ヒステリシス
+            </div>
+            <button data-action="goal-tuning">apply tuning</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="section-header">
+        <h2>コンソール</h2>
+        <button id="clear-log">ログをクリア</button>
+      </div>
+      <div class="log" id="log"></div>
+    </div>
+  </div>
+
+  <script>
+    const connectBtn = document.getElementById("connect-btn");
+    const disconnectBtn = document.getElementById("disconnect-btn");
+    const wsLabel = document.getElementById("ws-label");
+    const wsDot = document.getElementById("ws-dot");
+    const cubeDot = document.getElementById("cube-dot");
+    const goalMarker = document.getElementById("goal-pill");
+    const subscribeMarker = document.getElementById("subscribe-pill");
+    const poseText = document.getElementById("pose-text");
+    const battText = document.getElementById("batt-text");
+    const ledText = document.getElementById("led-text");
+    const motorText = document.getElementById("motor-text");
+    const scanResult = document.getElementById("scan-result");
+    const helloPill = document.getElementById("hello-pill");
+    const logView = document.getElementById("log");
+    const timelineInput = document.getElementById("timeline-input");
+    const timelineDelayInput = document.getElementById("timeline-delay");
+    const timelineStartOffsetInput = document.getElementById("timeline-start-offset");
+    const jsonIdList = document.getElementById("json-id-list");
+    const applyJsonBtn = document.getElementById("apply-json-btn");
+    const deviceListView = document.getElementById("device-list");
+    const allStatusBtn = document.getElementById("all-status-btn");
+    const allLedBtn = document.getElementById("all-led-btn");
+    const allScanBtn = document.getElementById("all-scan-btn");
+    const allConnectBtn = document.getElementById("all-connect-btn");
+
+    const ipSuffixInput = document.getElementById("ip-suffix");
+    const portInput = null; // ポート選択は固定
+    const mappingFileInput = document.getElementById("mapping-file");
+    const mappingLoadBtn = document.getElementById("mapping-load-btn");
+    const mappingConnectBtn = document.getElementById("mapping-connect-btn");
+    const mappingStatus = document.getElementById("mapping-status");
+    const deviceIdInput = document.getElementById("device-id");
+    const suffixInput = document.getElementById("suffix");
+    const ledInputs = {
+      r: document.getElementById("led-r"),
+      g: document.getElementById("led-g"),
+      b: document.getElementById("led-b"),
+    };
+    const motorInputs = {
+      left: document.getElementById("motor-left"),
+      right: document.getElementById("motor-right"),
+    };
+    const goalInputs = {
+      x: document.getElementById("goal-x"),
+      y: document.getElementById("goal-y"),
+      stop: document.getElementById("goal-stop"),
+      angle: document.getElementById("goal-angle"),
+      angleTol: document.getElementById("goal-angle-tol"),
+      usePos: document.getElementById("goal-use-pos"),
+      useRot: document.getElementById("goal-use-rot"),
+    };
+
+    const tuningInputs = {
+      vmax: document.getElementById("tune-vmax"),
+      wmax: document.getElementById("tune-wmax"),
+      kr: document.getElementById("tune-kr"),
+      ka: document.getElementById("tune-ka"),
+      revTh: document.getElementById("tune-rev-th"),
+      revHys: document.getElementById("tune-rev-hys"),
+    };
+
+    const connections = new Map(); // deviceId -> { socket, subscribed, timelineLoaded, lastParsedFrames, status, url, scanText, host, toioId, toioConnected }
+    const IP_PREFIX = "192.168.90.";
+    let selectedDeviceId = null;
+    let selectedJsonId = null;
+    let jsonIds = [];
+    let nextId = 1;
+    let mappingDevices = []; // [{id, ip, ip_suffix}]
+    deviceIdInput.readOnly = true;
+
+    function log(text, tone = "info", deviceId = "") {
+      const time = new Date().toLocaleTimeString();
+      const tag = deviceId ? `[${deviceId}] ` : "";
+      const line = `[${time}] ${tag}${text}`;
+      const div = document.createElement("div");
+      div.textContent = line;
+      if (tone === "error") div.style.color = "#f87171";
+      if (tone === "out") div.style.color = "#38bdf8";
+      if (tone === "in") div.style.color = "#22c55e";
+      logView.appendChild(div);
+      logView.scrollTop = logView.scrollHeight;
+    }
+
+    function setGlobalState() {
+      const count = connections.size;
+      wsLabel.textContent = `${count} devices`;
+      wsDot.className = count > 0 ? "dot ok" : "dot bad";
+      disconnectBtn.disabled = !selectedDeviceId || !connections.has(selectedDeviceId);
+    }
+
+    function setCubeState(connected) {
+      cubeDot.className = connected ? "dot ok" : "dot bad";
+    }
+
+    function formatPose(msg) {
+      if (typeof msg.x !== "number" || typeof msg.y !== "number") return "-";
+      const angle = typeof msg.angle === "number" ? msg.angle.toFixed(1) : "?";
+      const mat = msg.on_mat ? "on-mat" : "off-mat";
+      return `x:${msg.x.toFixed(1)} y:${msg.y.toFixed(1)} ang:${angle} ${mat}`;
+    }
+
+    function formatArray(arr) {
+      if (!Array.isArray(arr)) return "-";
+      return `[${arr.join(", ")}]`;
+    }
+
+    function renderJsonIdToggles() {
+      jsonIdList.innerHTML = "";
+      jsonIds.forEach((id) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = `toggle ${selectedJsonId === id ? "active" : ""}`;
+        btn.textContent = id;
+        btn.onclick = () => {
+          selectedJsonId = id;
+          deviceIdInput.value = id;
+          if (connections.has(id)) {
+            selectDevice(id);
+          }
+          renderJsonIdToggles();
+        };
+        jsonIdList.appendChild(btn);
+      });
+    }
+
+    function applyJsonIds() {
+      const json = parseTimelineJson();
+      if (!json) return;
+      const multi = parseTimelineMulti(json);
+      if (!multi) return;
+      jsonIds = Array.from(multi.keys());
+      if (jsonIds.length && !jsonIds.includes(selectedJsonId)) {
+        selectedJsonId = jsonIds[0];
+        deviceIdInput.value = selectedJsonId;
+      }
+      renderJsonIdToggles();
+    }
+
+    function renderDeviceList() {
+      deviceListView.innerHTML = "";
+      connections.forEach((conn, id) => {
+        const card = document.createElement("div");
+        card.className = "device-card";
+        const status = conn.status || {};
+        const connected = conn.socket && conn.socket.readyState === WebSocket.OPEN;
+        const head = document.createElement("h3");
+        head.innerHTML = `${id} <span class="badge ${connected ? "ok" : "bad"}">${connected ? "connected" : "disconnected"}</span>`;
+        card.appendChild(head);
+
+        const details = document.createElement("div");
+        details.className = "card-details";
+        const addDetail = (text) => {
+          const div = document.createElement("div");
+          div.className = "small mono";
+          div.textContent = text;
+          details.appendChild(div);
+        };
+        addDetail(`pose: ${formatPose(status)}`);
+        addDetail(`ip: ${conn.host || "-"}`);
+        const toioState = conn.toioConnected ? "connected" : "disconnected";
+        const toioLabel = conn.toioId ? ` (${conn.toioId})` : "";
+        addDetail(`toio: ${toioState}${toioLabel}`);
+        addDetail(`batt: ${typeof status.batt === "number" ? status.batt + "%" : "-"}`);
+        addDetail(`v: ${typeof status.board_v === "number" ? status.board_v.toFixed(2) + "V" : "-"}`);
+        addDetail(conn.scanText || "scan: -");
+        addDetail(`goal: ${status.goal_active ? "active" : "inactive"}`);
+        addDetail(`timeline: ${conn.timelineLoaded ? "loaded" : "not loaded"}`);
+        card.appendChild(details);
+
+        const scanRow = document.createElement("div");
+        scanRow.className = "flex";
+        const scanBtn = document.createElement("button");
+        scanBtn.textContent = "scan";
+        scanBtn.dataset.deviceAction = "scan";
+        scanBtn.dataset.deviceId = id;
+        const suffixInputCard = document.createElement("input");
+        suffixInputCard.type = "text";
+        suffixInputCard.placeholder = "suffix (A3Q)";
+        suffixInputCard.autocomplete = "off";
+        suffixInputCard.dataset.deviceId = id;
+        suffixInputCard.dataset.role = "suffix-input";
+        if (conn.toioId) suffixInputCard.value = conn.toioId;
+        const connectBtnCard = document.createElement("button");
+        connectBtnCard.textContent = "connect";
+        connectBtnCard.dataset.deviceAction = "connect-toio";
+        connectBtnCard.dataset.deviceId = id;
+        scanRow.appendChild(scanBtn);
+        scanRow.appendChild(suffixInputCard);
+        scanRow.appendChild(connectBtnCard);
+        card.appendChild(scanRow);
+
+        const btnRow = document.createElement("div");
+        btnRow.className = "flex";
+        const selBtn = document.createElement("button");
+        selBtn.textContent = "選択";
+        selBtn.onclick = () => selectDevice(id);
+        const disBtn = document.createElement("button");
+        disBtn.textContent = "切断";
+        disBtn.onclick = () => disconnect(id);
+        btnRow.appendChild(selBtn);
+        btnRow.appendChild(disBtn);
+        card.appendChild(btnRow);
+
+        deviceListView.appendChild(card);
+      });
+    }
+
+    function selectDevice(id) {
+      if (!connections.has(id)) return;
+      selectedDeviceId = id;
+      refreshSelectedStatus();
+      setGlobalState();
+    }
+
+    function refreshSelectedStatus() {
+      const conn = selectedDeviceId ? connections.get(selectedDeviceId) : null;
+      const status = conn?.status || {};
+      const connected = conn?.socket?.readyState === WebSocket.OPEN;
+      setCubeState(!!status.connected);
+      goalMarker.textContent = status.goal_active ? "goal active" : "goal inactive";
+      subscribeMarker.textContent = conn?.subscribed ? "subscribe: on" : "subscribe: off";
+      poseText.textContent = formatPose(status);
+      battText.textContent = typeof status.batt === "number" ? `${status.batt}%` : "-";
+      document.getElementById("boardv-text").textContent =
+        typeof status.board_v === "number" ? `${status.board_v.toFixed(2)}V` : "-";
+      ledText.textContent = formatArray(status.led);
+      motorText.textContent = formatArray(status.motor);
+      helloPill.textContent = conn?.hello ? "hello: received" : "hello: -";
+      disconnectBtn.disabled = !connected;
+      const dotState = connected ? "dot ok" : "dot bad";
+      document.getElementById("ws-dot").className = dotState;
+    }
+
+    function handleMessage(deviceId, data) {
+      log(`<- ${JSON.stringify(data)}`, "in", deviceId);
+      const conn = connections.get(deviceId);
+      if (!conn) return;
+      if (data.type === "hello") {
+        conn.hello = true;
+        if (deviceId === selectedDeviceId) helloPill.textContent = "hello: received";
+      } else if (data.type === "status") {
+        conn.status = data;
+        conn.status.connected = !!data.connected;
+        if (deviceId === selectedDeviceId) refreshSelectedStatus();
+      } else if (data.type === "disconnect-result") {
+        conn.status = {};
+        conn.subscribed = false;
+        conn.timelineLoaded = false;
+        conn.toioConnected = false;
+        conn.toioId = conn.toioId || null;
+        if (deviceId === selectedDeviceId) refreshSelectedStatus();
+      } else if (data.type === "status-subscribe-result" && !data.ok) {
+        conn.subscribed = !conn.subscribed;
+        if (deviceId === selectedDeviceId) refreshSelectedStatus();
+      } else if (data.type === "scan-result") {
+        const suffixes = Array.isArray(data.suffixes) ? data.suffixes.join(", ") : "-";
+        conn.scanText = `scan: status=${data.status} suffixes=${suffixes}`;
+        scanResult.textContent = conn.scanText;
+      } else if (data.type === "goal-reached") {
+        conn.status = { ...(conn.status || {}), goal_active: false };
+        if (deviceId === selectedDeviceId) goalMarker.textContent = "goal reached";
+      } else if (data.type === "timeline-load-result") {
+        conn.timelineLoaded = !!data.ok;
+        conn.lastParsedFrames = null;
+        log(data.ok ? "timeline loaded" : "timeline load failed", data.ok ? "in" : "error", deviceId);
+        renderDeviceList();
+      } else if (data.type === "timeline-start-result") {
+        log(`timeline start ${data.ok ? "ok" : "failed"}`, data.ok ? "in" : "error", deviceId);
+      } else if (data.type === "timeline-stop-result") {
+        conn.timelineLoaded = false;
+        log("timeline stopped", "in", deviceId);
+      }
+      if (typeof data.connected === "boolean") {
+        conn.toioConnected = data.connected;
+      }
+      renderDeviceList();
+    }
+
+    function buildUrl(hostOverride) {
+      const suffix = ipSuffixInput.value.trim();
+      const host = hostOverride
+        ? hostOverride
+        : (() => {
+            if (!suffix) {
+              alert("IP末尾を入力してください");
+              return null;
+            }
+            const oct = Number(suffix);
+            if (!Number.isInteger(oct) || oct < 1 || oct > 254) {
+              alert("IP末尾は 1..254 の整数で入力してください");
+              return null;
+            }
+            return `${IP_PREFIX}${oct}`;
+          })();
+      if (!host) return null;
+      const port = "9000";
+      const normalizedPath = "/";
+      return { url: `ws://${host}${port ? `:${port}` : ""}${normalizedPath}`, host };
+    }
+
+    function connect(hostOverride = null) {
+      const id = selectedJsonId || deviceIdInput.value.trim();
+      if (!id) {
+        alert("JSONのid（デバイス）を選択してください");
+        return;
+      }
+      deviceIdInput.value = id;
+      if (connections.has(id)) {
+        const existing = connections.get(id);
+        if (existing.socket && existing.socket.readyState === WebSocket.OPEN) {
+          alert("同じデバイス名が既に接続中です");
+          return;
+        }
+        connections.delete(id);
+      }
+      const urlInfo = buildUrl(hostOverride);
+      if (!urlInfo) return;
+      log(`connecting to ${urlInfo.url}`, "info", id);
+      const socket = new WebSocket(urlInfo.url);
+      const mapping = mappingDevices.find((m) => m.id === id);
+      const conn = {
+        socket,
+        subscribed: false,
+        timelineLoaded: false,
+        lastParsedFrames: null,
+        status: {},
+        hello: false,
+        url: urlInfo.url,
+        host: urlInfo.host,
+        scanText: "scan: -",
+        toioId: mapping?.toioId || null,
+        toioConnected: false,
+      };
+      connections.set(id, conn);
+      selectDevice(id);
+      setGlobalState();
+      renderDeviceList();
+
+      socket.onopen = () => {
+        log("WebSocket connected", "info", id);
+        setGlobalState();
+        refreshSelectedStatus();
+        const labelMsg = { type: "display-label", id: `cli-${nextId++}`, label: id };
+        socket.send(JSON.stringify(labelMsg));
+      };
+
+      socket.onclose = (ev) => {
+        const code = typeof ev.code === "number" ? ev.code : "n/a";
+        const reason = ev.reason || "no reason";
+        log(`WebSocket closed (code=${code}, reason=${reason})`, "error", id);
+        connections.delete(id);
+        if (selectedDeviceId === id) {
+          selectedDeviceId = connections.size ? connections.keys().next().value : null;
+        }
+        setGlobalState();
+        renderDeviceList();
+        refreshSelectedStatus();
+      };
+
+      socket.onerror = (ev) => {
+        const state = socket ? socket.readyState : -1;
+        log(`WebSocket error: ${ev.message || ev.type || "unknown"} (readyState=${state})`, "error", id);
+      };
+
+      socket.onmessage = (event) => {
+        try {
+          const json = JSON.parse(event.data);
+          handleMessage(id, json);
+        } catch (err) {
+          log(`<- ${event.data}`, "in", id);
+        }
+      };
+    }
+
+    function connectWithParams(id, host) {
+      if (!id) return;
+      if (connections.has(id) && connections.get(id).socket?.readyState === WebSocket.OPEN) {
+        log(`skip connect: ${id} already connected`, "info", id);
+        return;
+      }
+      const mapping = mappingDevices.find((m) => m.id === id);
+      const prevSelected = selectedJsonId;
+      selectedJsonId = id;
+      deviceIdInput.value = id;
+      if (mapping?.toioId) {
+        const existing = connections.get(id);
+        if (existing) existing.toioId = mapping.toioId;
+      }
+      connect(host);
+      selectedJsonId = prevSelected;
+    }
+
+    function disconnect(id = selectedDeviceId) {
+      if (!id || !connections.has(id)) return;
+      const conn = connections.get(id);
+      if (conn.socket && conn.socket.readyState === WebSocket.OPEN) {
+        conn.socket.close();
+      } else {
+        connections.delete(id);
+        if (selectedDeviceId === id) {
+          selectedDeviceId = connections.size ? connections.keys().next().value : null;
+        }
+        renderDeviceList();
+        setGlobalState();
+        refreshSelectedStatus();
+      }
+    }
+
+    function getCurrentConnection(id = selectedDeviceId) {
+      if (!id) return null;
+      const conn = connections.get(id);
+      if (conn && conn.socket && conn.socket.readyState === WebSocket.OPEN) return conn;
+      return null;
+    }
+
+    function send(action, payload = {}, targetId = selectedDeviceId) {
+      const conn = getCurrentConnection(targetId);
+      if (!conn) {
+        alert("対象デバイスが接続されていません");
+        return;
+      }
+      const msg = { type: action, id: `cli-${nextId++}`, ...payload };
+      conn.socket.send(JSON.stringify(msg));
+      log(`-> ${JSON.stringify(msg)}`, "out", targetId);
+    }
+
+    function sendAll(action, payloadBuilder) {
+      connections.forEach((conn, id) => {
+        if (!conn.socket || conn.socket.readyState !== WebSocket.OPEN) {
+          log(`skip ${action}: ${id} not connected`, "error", id);
+          return;
+        }
+        const payload = typeof payloadBuilder === "function" ? payloadBuilder(id) : payloadBuilder || {};
+        const msg = { type: action, id: `cli-${nextId++}`, ...payload };
+        conn.socket.send(JSON.stringify(msg));
+        log(`-> ${JSON.stringify(msg)}`, "out", id);
+      });
+    }
+
+    function getLedPayload() {
+      const r = Number(ledInputs.r.value);
+      const g = Number(ledInputs.g.value);
+      const b = Number(ledInputs.b.value);
+      if (![r, g, b].every((v) => Number.isInteger(v) && v >= 0 && v <= 255)) {
+        alert("r/g/b は 0..255 の整数で入力してください");
+        return null;
+      }
+      return { r, g, b };
+    }
+
+    function handleAction(action) {
+      switch (action) {
+        case "scan":
+          send("scan");
+          break;
+        case "connect": {
+          const suffix = suffixInput.value.trim();
+          if (!suffix) {
+            alert("suffix を入力してください");
+            return;
+          }
+          const conn = getCurrentConnection();
+          if (conn) {
+            conn.toioId = suffix;
+            conn.toioConnected = false;
+            renderDeviceList();
+          }
+          send("connect", { suffix });
+          break;
+        }
+        case "disconnect":
+          send("disconnect");
+          break;
+        case "status-request":
+          send("status-request");
+          break;
+        case "subscribe-toggle":
+          if (!selectedDeviceId) return;
+          const conn = connections.get(selectedDeviceId);
+          if (!conn) return;
+          conn.subscribed = !conn.subscribed;
+          send("status-subscribe", { enable: conn.subscribed });
+          refreshSelectedStatus();
+          break;
+        case "led": {
+          const payload = getLedPayload();
+          if (!payload) return;
+          send("led", payload);
+          break;
+        }
+        case "motor": {
+          const left = Number(motorInputs.left.value);
+          const right = Number(motorInputs.right.value);
+          if (![left, right].every((v) => Number.isInteger(v) && v >= -100 && v <= 100)) {
+            alert("left/right は -100..100 の整数で入力してください");
+            return;
+          }
+          send("motor", { left, right });
+          break;
+        }
+        case "goal-set": {
+          const usePos = goalInputs.usePos.checked;
+          const useRot = goalInputs.useRot.checked;
+          if (!usePos && !useRot) {
+            alert("use_position か use_rotation のどちらかを選んでください");
+            return;
+          }
+          if (usePos && (goalInputs.x.value === "" || goalInputs.y.value === "")) {
+            alert("use_position が有効な場合、x と y を入力してください");
+            return;
+          }
+          if (useRot && goalInputs.angle.value === "") {
+            alert("use_rotation が有効な場合、angle を入力してください");
+            return;
+          }
+          const payload = {
+            use_position: usePos,
+            use_rotation: useRot,
+            x: usePos ? Number(goalInputs.x.value) : undefined,
+            y: usePos ? Number(goalInputs.y.value) : undefined,
+            rotation: useRot ? Number(goalInputs.angle.value) : undefined,
+            stop_distance: goalInputs.stop.value ? Number(goalInputs.stop.value) : 20,
+            angle_tolerance: goalInputs.angleTol.value ? Number(goalInputs.angleTol.value) : 5,
+          };
+          send("goal-set", payload);
+          break;
+        }
+        case "goal-clear":
+          send("goal-clear");
+          break;
+        case "goal-tuning": {
+          send("goal-tuning", {
+            vmax: Number(tuningInputs.vmax.value || 70),
+            wmax: Number(tuningInputs.wmax.value || 60),
+            k_r: Number(tuningInputs.kr.value || 0.5),
+            k_a: Number(tuningInputs.ka.value || 1.2),
+            reverse_threshold_deg: Number(tuningInputs.revTh.value || 90),
+            reverse_hysteresis_deg: Number(tuningInputs.revHys.value || 10),
+          });
+          break;
+        }
+        default:
+          break;
+      }
+    }
+
+    function parseTimelineJson() {
+      try {
+        return JSON.parse(timelineInput.value);
+      } catch (e) {
+        log(`timeline parse error: ${e.message}`, "error", selectedDeviceId || "");
+        return null;
+      }
+    }
+
+    function parseFramesArray(frames, labelForLog = "") {
+      if (!frames || !Array.isArray(frames) || frames.length === 0) {
+        log("timeline requires frames[]", "error", labelForLog);
+        return null;
+      }
+      const parsed = [];
+      for (let i = 0; i < frames.length; ++i) {
+        const f = frames[i];
+        const up = !!f.use_position;
+        const ur = !!f.use_rotation;
+        if (typeof f.time !== "number" || f.time < 0) {
+          log(`frame ${i}: invalid time`, "error", labelForLog);
+          return null;
+        }
+        const posX = f.position?.x ?? f.x;
+        const posY = f.position?.y ?? f.y;
+        const frame = {
+          t: f.time,
+          up,
+          ur,
+          x: up ? Number(posX) : 0,
+          y: up ? Number(posY) : 0,
+          ang: ur ? Number(f.rotation ?? f.angle) : 0,
+          sd: typeof f.stop_distance === "number" ? f.stop_distance : 20,
+          at: typeof f.angle_tolerance === "number" ? f.angle_tolerance : 5,
+        };
+          if (typeof f.sound === "string" && f.sound.trim().length > 0) {
+            frame.sound = f.sound;
+          }
+          if (up && (!Number.isFinite(frame.x) || !Number.isFinite(frame.y))) {
+            log(`frame ${i}: position x/y required`, "error", labelForLog);
+            return null;
+          }
+          if (ur && !Number.isFinite(frame.ang)) {
+            log(`frame ${i}: angle required`, "error", labelForLog);
+            return null;
+          }
+        parsed.push(frame);
+      }
+      parsed.sort((a, b) => a.t - b.t);
+      return parsed;
+    }
+
+    function parseTimelineMulti(json) {
+      if (!json) return null;
+      if (json.devices && typeof json.devices === "object") {
+        const entries = Object.entries(json.devices);
+        if (entries.length > 0) {
+          const result = new Map();
+          for (const [deviceId, obj] of entries) {
+            const frames = parseFramesArray(obj?.frames, deviceId);
+            if (!frames) return null;
+            result.set(deviceId, frames);
+          }
+          return result;
+        }
+      }
+      // fallback: sets array [{id, frames}]
+      if (Array.isArray(json.sets)) {
+        const result = new Map();
+        for (const set of json.sets) {
+          if (!set?.id) {
+            log("timeline sets: missing id", "error");
+            return null;
+          }
+          const frames = parseFramesArray(set.frames, set.id);
+          if (!frames) return null;
+          result.set(set.id, frames);
+        }
+        return result;
+      }
+      log("devices/sets not found", "error");
+      return null;
+    }
+
+    function parseMappingList(list) {
+      const parsed = [];
+      for (const entry of list) {
+        if (!entry.id) throw new Error("device entry requires id");
+        const host =
+          typeof entry.ip === "string"
+            ? entry.ip
+            : typeof entry.ip_suffix === "number"
+            ? `${IP_PREFIX}${entry.ip_suffix}`
+            : null;
+        if (!host) throw new Error(`device ${entry.id}: ip or ip_suffix is required`);
+        const toioId = typeof entry.toio_id === "string" ? entry.toio_id : null;
+        parsed.push({ id: entry.id, host, toioId });
+      }
+      return parsed;
+    }
+
+    function loadMappingFromFile(file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const json = JSON.parse(reader.result);
+          const list = Array.isArray(json.devices) ? json.devices : [];
+          const parsed = parseMappingList(list);
+          mappingDevices = parsed;
+          mappingStatus.textContent = `loaded ${parsed.length} devices`;
+          if (parsed.length > 0) {
+            selectedJsonId = parsed[0].id;
+            deviceIdInput.value = parsed[0].id;
+            renderJsonIdToggles();
+          }
+        } catch (e) {
+          mappingDevices = [];
+          mappingStatus.textContent = `error: ${e.message}`;
+        }
+      };
+      reader.onerror = () => {
+        mappingDevices = [];
+        mappingStatus.textContent = "error: read failed";
+      };
+      reader.readAsText(file);
+    }
+
+    async function loadMappingFromUrl(url) {
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`status ${res.status}`);
+        const json = await res.json();
+        const list = Array.isArray(json.devices) ? json.devices : [];
+        const parsed = parseMappingList(list);
+        mappingDevices = parsed;
+        mappingStatus.textContent = `autoload: ${parsed.length} devices`;
+        if (parsed.length > 0) {
+          selectedJsonId = parsed[0].id;
+          deviceIdInput.value = parsed[0].id;
+          renderJsonIdToggles();
+        }
+      } catch (e) {
+        mappingStatus.textContent = `autoload failed (${e.message})`;
+      }
+    }
+
+    function connectAllFromMapping() {
+      if (!mappingDevices.length) {
+        alert("mappingファイルを先に読み込んでください");
+        return;
+      }
+      mappingDevices.forEach((m) => connectWithParams(m.id, m.host));
+    }
+
+    function sendTimelineLoad() {
+      const json = parseTimelineJson();
+      if (!json) return;
+
+      const multi = parseTimelineMulti(json);
+      if (!multi) return;
+      jsonIds = Array.from(multi.keys());
+      if (jsonIds.length && !jsonIds.includes(selectedJsonId)) {
+        selectedJsonId = jsonIds[0];
+        deviceIdInput.value = selectedJsonId;
+      }
+      renderJsonIdToggles();
+      multi.forEach((frames, id) => {
+        const conn = connections.get(id);
+        if (!conn || !conn.socket || conn.socket.readyState !== WebSocket.OPEN) {
+          log(`skip timeline-load: ${id} not connected`, "error", id);
+          return;
+        }
+        conn.timelineLoaded = false;
+        conn.lastParsedFrames = frames;
+        send("timeline-load", { frames }, id);
+      });
+    }
+
+    function sendTimelineStart() {
+      const json = parseTimelineJson();
+      if (!json) return;
+
+      const startOffsetSec = timelineStartOffsetInput.value
+        ? Number(timelineStartOffsetInput.value)
+        : 0;
+      const startEpoch =
+        startOffsetSec > 0 ? Math.floor(Date.now() + startOffsetSec * 1000) : 0;
+      const delay = timelineDelayInput.value ? Number(timelineDelayInput.value) : 0;
+      const payload = { delay_ms: delay };
+      if (startEpoch > 0) {
+        payload.start_epoch_ms = startEpoch;
+      }
+
+      const multi = parseTimelineMulti(json);
+      if (!multi) return;
+      jsonIds = Array.from(multi.keys());
+      if (jsonIds.length && !jsonIds.includes(selectedJsonId)) {
+        selectedJsonId = jsonIds[0];
+        deviceIdInput.value = selectedJsonId;
+      }
+      renderJsonIdToggles();
+      multi.forEach((frames, id) => {
+        const conn = connections.get(id);
+        if (!conn || !conn.socket || conn.socket.readyState !== WebSocket.OPEN) {
+          log(`skip timeline-start: ${id} not connected`, "error", id);
+          return;
+        }
+        if (!conn.timelineLoaded && !conn.lastParsedFrames) {
+          conn.lastParsedFrames = frames;
+        }
+        send("timeline-start", payload, id);
+      });
+    }
+
+    function sendTimelineInitGoal() {
+      const json = parseTimelineJson();
+      if (!json) return;
+      const multi = parseTimelineMulti(json);
+      if (!multi) return;
+      jsonIds = Array.from(multi.keys());
+      renderJsonIdToggles();
+      multi.forEach((frames, id) => {
+        if (!frames || frames.length === 0) {
+          log("timeline init: frames not found", "error", id);
+          return;
+        }
+        const f = frames[0];
+        if (!f.up && !f.ur) {
+          log("timeline init: first frame must have use_position or use_rotation", "error", id);
+          return;
+        }
+        if (!getCurrentConnection(id)) {
+          log(`timeline init skipped: ${id} not connected`, "error", id);
+          return;
+        }
+        send("goal-set", {
+          use_position: f.up,
+          use_rotation: f.ur,
+          x: f.up ? f.x : undefined,
+          y: f.up ? f.y : undefined,
+          rotation: f.ur ? f.ang : undefined,
+          stop_distance: f.sd,
+          angle_tolerance: f.at,
+        }, id);
+      });
+    }
+
+    function handleDeviceCardAction(action, id) {
+      switch (action) {
+        case "scan":
+          send("scan", {}, id);
+          break;
+        case "connect-toio": {
+          const input = deviceListView.querySelector(`input[data-role="suffix-input"][data-device-id="${id}"]`);
+          const suffix = input?.value.trim();
+          if (!suffix) {
+            alert("suffix を入力してください");
+            return;
+          }
+          const conn = getCurrentConnection(id);
+          if (conn) {
+            conn.toioId = suffix;
+            conn.toioConnected = false;
+            renderDeviceList();
+          }
+          send("connect", { suffix }, id);
+          break;
+        }
+        default:
+          break;
+      }
+    }
+
+    function stopTimelinePlayback() {
+      const json = parseTimelineJson();
+      if (!json) return;
+      const multi = parseTimelineMulti(json);
+      if (!multi) return;
+      multi.forEach((_, id) => {
+        const conn = getCurrentConnection(id);
+        if (!conn) {
+          log(`timeline-stop skipped: ${id} not connected`, "error", id);
+          return;
+        }
+        conn.timelineLoaded = false;
+        send("timeline-stop", {}, id);
+      });
+    }
+
+    function loadSampleTimeline() {
+      const sample = {
+        sets: [
+          {
+            id: "robot_00",
+            frames: [
+              { time: 0.0, use_position: true, x: 100.0, y: 100.0, sound: "aurora" },
+              { time: 2.0, use_position: true, x: 200.0, y: 300.0 },
+              { time: 4.0, use_rotation: true, rotation: 180.0, sound: "reef" },
+            ],
+          },
+          {
+            id: "robot_01",
+            frames: [
+              { time: 0.0, use_position: true, x: 200.0, y: 300.0, sound: "frog" },
+              { time: 3.0, use_position: true, x: 300.0, y: 200.0 },
+            ],
+          },
+        ],
+      };
+      timelineInput.value = JSON.stringify(sample, null, 2);
+      applyJsonIds();
+    }
+
+    connectBtn.addEventListener("click", connect);
+    disconnectBtn.addEventListener("click", () => disconnect());
+    mappingLoadBtn.addEventListener("click", () => {
+      const file = mappingFileInput.files?.[0];
+      if (!file) {
+        alert("JSONファイルを選択してください");
+        return;
+      }
+      loadMappingFromFile(file);
+    });
+    mappingConnectBtn.addEventListener("click", connectAllFromMapping);
+    document.querySelectorAll("button[data-action]").forEach((btn) => {
+      btn.addEventListener("click", () => handleAction(btn.dataset.action));
+    });
+    document.getElementById("clear-log").addEventListener("click", () => {
+      logView.innerHTML = "";
+    });
+    applyJsonBtn.addEventListener("click", applyJsonIds);
+    document.getElementById("timeline-load-btn").addEventListener("click", sendTimelineLoad);
+    document.getElementById("timeline-start-btn").addEventListener("click", sendTimelineStart);
+    document.getElementById("timeline-init-btn").addEventListener("click", sendTimelineInitGoal);
+    document.getElementById("timeline-stop").addEventListener("click", stopTimelinePlayback);
+    document.getElementById("timeline-sample").addEventListener("click", loadSampleTimeline);
+    deviceListView.addEventListener("click", (e) => {
+      const target = e.target.closest("[data-device-action]");
+      if (!target) return;
+      const action = target.dataset.deviceAction;
+      const id = target.dataset.deviceId;
+      if (!id) return;
+      handleDeviceCardAction(action, id);
+    });
+    allStatusBtn.addEventListener("click", () => sendAll("status-request", {}));
+    allLedBtn.addEventListener("click", () => {
+      const payload = getLedPayload();
+      if (!payload) return;
+      sendAll("led", payload);
+    });
+    allScanBtn.addEventListener("click", () => sendAll("scan", {}));
+    allConnectBtn.addEventListener("click", () => {
+      connections.forEach((conn, id) => {
+        const suffix =
+          conn.toioId ||
+          deviceListView.querySelector(`input[data-role="suffix-input"][data-device-id="${id}"]`)?.value.trim() ||
+          "";
+        if (!suffix) {
+          log(`skip connect: ${id} suffix not set`, "error", id);
+          return;
+        }
+        send("connect", { suffix }, id);
+      });
+    });
+
+    setGlobalState();
+    renderDeviceList();
+    loadMappingFromUrl("device.json");
+  </script>
+</body>
+</html>

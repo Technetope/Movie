@@ -1,0 +1,268 @@
+{
+  "frames": [
+    {
+      "time": 0.0,
+      "use_position": false,
+      "use_rotation": true,
+      "position": {
+        "x": 198.7,
+        "y": 502.25
+      },
+      "rotation": 90.0,
+      "sound": null
+    },
+    {
+      "time": 0.5,
+      "use_position": true,
+      "use_rotation": false,
+      "position": {
+        "x": 656.2,
+        "y": 502.25
+      },
+      "rotation": 90.0,
+      "sound": null
+    },
+    {
+      "time": 3.5,
+      "use_position": false,
+      "use_rotation": false,
+      "position": {
+        "x": 656.2,
+        "y": 502.25
+      },
+      "rotation": 90.0,
+      "sound": null
+    },
+    {
+      "time": 5.5,
+      "use_position": false,
+      "use_rotation": true,
+      "position": {
+        "x": 656.2,
+        "y": 502.25
+      },
+      "rotation": 0.0,
+      "sound": null
+    },
+    {
+      "time": 6.0,
+      "use_position": true,
+      "use_rotation": false,
+      "position": {
+        "x": 656.2,
+        "y": 70.75
+      },
+      "rotation": 0.0,
+      "sound": null
+    },
+    {
+      "time": 9.0,
+      "use_position": false,
+      "use_rotation": false,
+      "position": {
+        "x": 656.2,
+        "y": 70.75
+      },
+      "rotation": 0.0,
+      "sound": null
+    },
+    {
+      "time": 11.0,
+      "use_position": false,
+      "use_rotation": true,
+      "position": {
+        "x": 656.2,
+        "y": 70.75
+      },
+      "rotation": 270.0,
+      "sound": null
+    },
+    {
+      "time": 11.5,
+      "use_position": true,
+      "use_rotation": false,
+      "position": {
+        "x": 198.7,
+        "y": 70.75
+      },
+      "rotation": 270.0,
+      "sound": null
+    },
+    {
+      "time": 14.5,
+      "use_position": false,
+      "use_rotation": false,
+      "position": {
+        "x": 198.7,
+        "y": 70.75
+      },
+      "rotation": 270.0,
+      "sound": null
+    },
+    {
+      "time": 16.5,
+      "use_position": false,
+      "use_rotation": true,
+      "position": {
+        "x": 198.7,
+        "y": 70.75
+      },
+      "rotation": 180.0,
+      "sound": null
+    },
+    {
+      "time": 17.0,
+      "use_position": true,
+      "use_rotation": false,
+      "position": {
+        "x": 198.7,
+        "y": 502.25
+      },
+      "rotation": 180.0,
+      "sound": null
+    },
+    {
+      "time": 20.0,
+      "use_position": false,
+      "use_rotation": false,
+      "position": {
+        "x": 198.7,
+        "y": 502.25
+      },
+      "rotation": 180.0,
+      "sound": null
+    },
+    {
+      "time": 22.0,
+      "use_position": false,
+      "use_rotation": true,
+      "position": {
+        "x": 198.7,
+        "y": 502.25
+      },
+      "rotation": 133.325,
+      "sound": null
+    },
+    {
+      "time": 22.5,
+      "use_position": true,
+      "use_rotation": false,
+      "position": {
+        "x": 427.45,
+        "y": 286.5
+      },
+      "rotation": 133.325,
+      "sound": null
+    },
+    {
+      "time": 25.5,
+      "use_position": false,
+      "use_rotation": false,
+      "position": {
+        "x": 427.45,
+        "y": 286.5
+      },
+      "rotation": 133.325,
+      "sound": null
+    },
+    {
+      "time": 27.5,
+      "use_position": false,
+      "use_rotation": false,
+      "position": {
+        "x": 427.45,
+        "y": 286.5
+      },
+      "rotation": 133.325,
+      "sound": null
+    },
+    {
+      "time": 130.0,
+      "use_position": false,
+      "use_rotation": true,
+      "position": {
+        "x": 427.45,
+        "y": 286.5
+      },
+      "rotation": 90.0,
+      "sound": null
+    },
+    {
+      "time": 130.5,
+      "use_position": true,
+      "use_rotation": false,
+      "position": {
+        "x": 656.2,
+        "y": 502.25
+      },
+      "rotation": 90.0,
+      "sound": null
+    },
+    {
+      "time": 135.5,
+      "use_position": false,
+      "use_rotation": true,
+      "position": {
+        "x": 656.2,
+        "y": 502.25
+      },
+      "rotation": 0.0,
+      "sound": null
+    },
+    {
+      "time": 136.0,
+      "use_position": true,
+      "use_rotation": false,
+      "position": {
+        "x": 656.2,
+        "y": 70.75
+      },
+      "rotation": 0.0,
+      "sound": null
+    },
+    {
+      "time": 141.0,
+      "use_position": false,
+      "use_rotation": true,
+      "position": {
+        "x": 656.2,
+        "y": 70.75
+      },
+      "rotation": 270.0,
+      "sound": null
+    },
+    {
+      "time": 141.5,
+      "use_position": true,
+      "use_rotation": false,
+      "position": {
+        "x": 198.7,
+        "y": 70.75
+      },
+      "rotation": 270.0,
+      "sound": null
+    },
+    {
+      "time": 146.5,
+      "use_position": false,
+      "use_rotation": true,
+      "position": {
+        "x": 198.7,
+        "y": 70.75
+      },
+      "rotation": 180.0,
+      "sound": null
+    },
+    {
+      "time": 147.0,
+      "use_position": true,
+      "use_rotation": false,
+      "position": {
+        "x": 198.7,
+        "y": 502.25
+      },
+      "rotation": 180.0,
+      "sound": null
+    }
+  ]
+}

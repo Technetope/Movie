@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>M5 toio WebSocket クライアント</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #0f172a;
+      --panel: #111827;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --danger: #f87171;
+      --border: #1f2937;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    h1 { font-size: 1.4rem; margin: 0 0 12px; }
+    h2 { font-size: 1.1rem; margin: 0 0 10px; }
+    p { margin: 0 0 12px; color: var(--muted); }
+    label { display: block; font-size: 0.9rem; color: var(--muted); margin-bottom: 4px; }
+    input, button, select {
+      font: inherit;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: #0b1220;
+      color: var(--text);
+    }
+    button {
+      background: #1e293b;
+      border-color: #334155;
+      cursor: pointer;
+      transition: transform 0.05s ease, background 0.2s ease;
+    }
+    button:hover { background: #0ea5e9; color: #0b1220; }
+    button:active { transform: translateY(1px); }
+    button[disabled] { opacity: 0.5; cursor: not-allowed; }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px;
+      display: grid;
+      gap: 16px;
+    }
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 12px;
+    }
+    .flex {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .rows { display: grid; gap: 10px; }
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #1f2937;
+      border: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--muted);
+    }
+    .dot.ok { background: #22c55e; }
+    .dot.bad { background: var(--danger); }
+    .log {
+      padding: 10px;
+      background: #0b1220;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      min-height: 240px;
+      max-height: 360px;
+      overflow: auto;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+    textarea {
+      width: 100%;
+      min-height: 180px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: #0b1220;
+      color: var(--text);
+      padding: 10px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+    .small { font-size: 0.9rem; color: var(--muted); }
+    .row-inputs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 8px;
+    }
+    .pill { padding: 2px 8px; border-radius: 999px; border: 1px solid var(--border); background: #0b1220; }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .hint { color: var(--muted); font-size: 0.85rem; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="panel">
+      <h1>M5 toio WebSocket クライアント</h1>
+      <p>ミニマルなブラウザ用クライアントです。M5のIP・ポートを入力して接続し、各種コマンドを送ってください。</p>
+      <div class="grid-2">
+        <div class="rows">
+          <div class="section-header">
+            <h2>接続</h2>
+            <span class="status-badge" id="ws-state">
+              <span class="dot" id="ws-dot"></span>
+              <span id="ws-label">disconnected</span>
+            </span>
+          </div>
+          <div class="rows">
+            <div class="row-inputs">
+              <div>
+                <label for="host">ホスト/IP</label>
+                <input id="host" type="text" placeholder="192.168.x.x" autocomplete="off">
+              </div>
+              <div>
+                <label for="port">ポート</label>
+                <input id="port" type="number" min="1" max="65535" value="9000">
+              </div>
+              <div>
+                <label for="path">パス</label>
+                <input id="path" type="text" value="/" autocomplete="off">
+              </div>
+            </div>
+            <div class="flex">
+              <button id="connect-btn">接続</button>
+              <button id="disconnect-btn" disabled>切断</button>
+              <span class="hint">URLは <span class="mono">ws://host:port/path</span> 形式。IPはM5の画面に表示されます。</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="rows">
+          <div class="section-header">
+            <h2>現在の状態</h2>
+            <span class="pill mono" id="hello-pill" title="hello受信状況">hello: -</span>
+          </div>
+          <div class="rows small">
+            <div class="flex">
+              <span class="status-badge">
+                <span class="dot" id="cube-dot"></span>
+                <span>Cube 接続</span>
+              </span>
+              <span class="pill" id="goal-pill">goal inactive</span>
+              <span class="pill" id="subscribe-pill">subscribe: off</span>
+            </div>
+            <div>Pose: <span class="mono" id="pose-text">-</span></div>
+            <div>Battery: <span class="mono" id="batt-text">-</span></div>
+            <div>Board V: <span class="mono" id="boardv-text">-</span></div>
+            <div>LED: <span class="mono" id="led-text">-</span></div>
+            <div>Motor: <span class="mono" id="motor-text">-</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="section-header">
+        <h2>コマンド</h2>
+        <span class="hint">送信時に自動で <span class="mono">id</span> を付与します。</span>
+      </div>
+      <div class="grid-2">
+        <div class="rows">
+          <div class="flex">
+            <button data-action="scan">scan</button>
+            <span class="hint" id="scan-result">scan-result: -</span>
+          </div>
+          <div class="rows">
+            <label for="suffix">connect (suffix)</label>
+            <div class="flex">
+              <input id="suffix" type="text" placeholder="A3Q" autocomplete="off">
+              <button data-action="connect">connect</button>
+            </div>
+            <span class="hint">toioの末尾3文字を指定</span>
+          </div>
+          <div class="rows">
+            <label>disconnect</label>
+            <button data-action="disconnect">disconnect</button>
+            <span class="hint">接続中の toio から切断します</span>
+          </div>
+          <div class="rows">
+            <label>status</label>
+            <div class="flex">
+              <button data-action="status-request">status-request</button>
+              <button data-action="subscribe-toggle">subscribe on/off</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="rows">
+          <div class="rows">
+            <label>led</label>
+            <div class="row-inputs">
+              <input id="led-r" type="number" min="0" max="255" placeholder="r">
+              <input id="led-g" type="number" min="0" max="255" placeholder="g">
+              <input id="led-b" type="number" min="0" max="255" placeholder="b">
+            </div>
+            <button data-action="led">set led</button>
+          </div>
+
+          <div class="rows">
+            <label>motor (-100..100)</label>
+            <div class="row-inputs">
+              <input id="motor-left" type="number" min="-100" max="100" placeholder="left">
+              <input id="motor-right" type="number" min="-100" max="100" placeholder="right">
+            </div>
+            <button data-action="motor">drive motor</button>
+          </div>
+
+          <div class="rows">
+            <label>goal-set</label>
+            <div class="row-inputs">
+              <input id="goal-x" type="number" step="1" placeholder="x">
+              <input id="goal-y" type="number" step="1" placeholder="y">
+              <input id="goal-stop" type="number" step="1" placeholder="stop distance (default 20)" value="20">
+              <input id="goal-angle" type="number" step="1" placeholder="angle (deg)">
+              <input id="goal-angle-tol" type="number" step="1" placeholder="angle tol (deg, default 5)" value="5">
+            </div>
+            <div class="hint">
+              x/y:目標座標, stop:到達判定距離, angle:目標角度deg, angle tol:角度許容deg
+            </div>
+            <div class="flex">
+              <label><input id="goal-use-pos" type="checkbox" checked> use_position</label>
+              <label><input id="goal-use-rot" type="checkbox"> use_rotation</label>
+            </div>
+            <div class="flex">
+              <button data-action="goal-set">set goal</button>
+              <button data-action="goal-clear">goal-clear</button>
+            </div>
+          </div>
+
+          <div class="rows">
+            <label>goal-tuning</label>
+            <div class="row-inputs">
+              <input id="tune-vmax" type="number" step="1" placeholder="vmax (default 70)" value="70">
+              <input id="tune-wmax" type="number" step="1" placeholder="wmax (default 60)" value="60">
+              <input id="tune-kr" type="number" step="0.1" placeholder="k_r (default 0.5)" value="0.5">
+              <input id="tune-ka" type="number" step="0.1" placeholder="k_a (default 1.2)" value="1.2">
+              <input id="tune-rev-th" type="number" step="1" placeholder="reverse threshold deg (default 90)" value="90">
+              <input id="tune-rev-hys" type="number" step="1" placeholder="reverse hysteresis deg (default 10)" value="10">
+            </div>
+            <div class="hint">
+              vmax:並進上限, wmax:回転上限, k_r/k_a:比例ゲイン, reverse*:後退モードのしきい値/ヒステリシス
+            </div>
+            <button data-action="goal-tuning">apply tuning</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <div class="panel">
+        <div class="section-header">
+        <h2>JSONタイムライン再生</h2>
+        <span class="hint">上の toio 接続後、フレームを書き込み→任意のタイミングで再生</span>
+      </div>
+      <div class="rows">
+        <textarea id="timeline-input" spellcheck="false" placeholder='{"frames":[...]}'></textarea>
+        <div class="row-inputs">
+          <input id="timeline-delay" type="number" min="0" step="100" placeholder="start delay ms (default 0)">
+          <input id="timeline-start-offset" type="number" min="0" step="0.1" placeholder="start offset seconds (optional)">
+        </div>
+        <div class="flex">
+          <button id="timeline-load-btn">書き込み</button>
+          <button id="timeline-start-btn">再生</button>
+          <button id="timeline-init-btn">初期位置へ</button>
+          <button id="timeline-stop">停止</button>
+          <button id="timeline-sample">サンプル読込</button>
+        </div>
+        <p class="hint">
+          write: timeline-load / play: timeline-start(delay_ms)。停止は timeline-stop。<br>
+          sound を指定する場合は `"sound": "aurora"` などをフレームに入れてください（埋め込みID例: aurora, birds, cicada, crystal, dolphin, frog, geyser, insect, reef）。
+        </p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="section-header">
+        <h2>コンソール</h2>
+        <button id="clear-log">ログをクリア</button>
+      </div>
+      <div class="log" id="log"></div>
+    </div>
+  </div>
+
+  <script>
+    const connectBtn = document.getElementById("connect-btn");
+    const disconnectBtn = document.getElementById("disconnect-btn");
+    const wsLabel = document.getElementById("ws-label");
+    const wsDot = document.getElementById("ws-dot");
+    const cubeDot = document.getElementById("cube-dot");
+    const goalMarker = document.getElementById("goal-pill");
+    const subscribeMarker = document.getElementById("subscribe-pill");
+    const poseText = document.getElementById("pose-text");
+    const battText = document.getElementById("batt-text");
+    const ledText = document.getElementById("led-text");
+    const motorText = document.getElementById("motor-text");
+    const scanResult = document.getElementById("scan-result");
+    const helloPill = document.getElementById("hello-pill");
+    const logView = document.getElementById("log");
+    const timelineInput = document.getElementById("timeline-input");
+    const timelineDelayInput = document.getElementById("timeline-delay");
+    const timelineStartOffsetInput = document.getElementById("timeline-start-offset");
+
+    const hostInput = document.getElementById("host");
+    const portInput = document.getElementById("port");
+    const pathInput = document.getElementById("path");
+    const suffixInput = document.getElementById("suffix");
+    const ledInputs = {
+      r: document.getElementById("led-r"),
+      g: document.getElementById("led-g"),
+      b: document.getElementById("led-b"),
+    };
+    const motorInputs = {
+      left: document.getElementById("motor-left"),
+      right: document.getElementById("motor-right"),
+    };
+    const goalInputs = {
+      x: document.getElementById("goal-x"),
+      y: document.getElementById("goal-y"),
+      stop: document.getElementById("goal-stop"),
+      angle: document.getElementById("goal-angle"),
+      angleTol: document.getElementById("goal-angle-tol"),
+      usePos: document.getElementById("goal-use-pos"),
+      useRot: document.getElementById("goal-use-rot"),
+    };
+
+    const tuningInputs = {
+      vmax: document.getElementById("tune-vmax"),
+      wmax: document.getElementById("tune-wmax"),
+      kr: document.getElementById("tune-kr"),
+      ka: document.getElementById("tune-ka"),
+      revTh: document.getElementById("tune-rev-th"),
+      revHys: document.getElementById("tune-rev-hys"),
+    };
+
+    let socket = null;
+    let nextId = 1;
+    let subscribed = false;
+    let timelineLoaded = false;
+    let lastParsedFrames = null;
+
+    function log(text, tone = "info") {
+      const time = new Date().toLocaleTimeString();
+      const line = `[${time}] ${text}`;
+      const div = document.createElement("div");
+      div.textContent = line;
+      if (tone === "error") div.style.color = "#f87171";
+      if (tone === "out") div.style.color = "#38bdf8";
+      if (tone === "in") div.style.color = "#22c55e";
+      logView.appendChild(div);
+      logView.scrollTop = logView.scrollHeight;
+    }
+
+    function setWsState(connected) {
+      wsLabel.textContent = connected ? "connected" : "disconnected";
+      wsDot.className = connected ? "dot ok" : "dot bad";
+      connectBtn.disabled = connected;
+      disconnectBtn.disabled = !connected;
+    }
+
+    function setCubeState(connected) {
+      cubeDot.className = connected ? "dot ok" : "dot bad";
+    }
+
+    function formatPose(msg) {
+      if (typeof msg.x !== "number" || typeof msg.y !== "number") return "-";
+      const angle = typeof msg.angle === "number" ? msg.angle.toFixed(1) : "?";
+      const mat = msg.on_mat ? "on-mat" : "off-mat";
+      return `x:${msg.x.toFixed(1)} y:${msg.y.toFixed(1)} ang:${angle} ${mat}`;
+    }
+
+    function formatArray(arr) {
+      if (!Array.isArray(arr)) return "-";
+      return `[${arr.join(", ")}]`;
+    }
+
+    function updateStatus(msg) {
+      setCubeState(!!msg.connected);
+      poseText.textContent = formatPose(msg);
+      battText.textContent = typeof msg.batt === "number" ? `${msg.batt}%` : "-";
+      const board = typeof msg.board_v === "number" ? `${msg.board_v.toFixed(2)}V` : "-";
+      document.getElementById("boardv-text").textContent = board;
+      ledText.textContent = formatArray(msg.led);
+      motorText.textContent = formatArray(msg.motor);
+      goalMarker.textContent = msg.goal_active ? "goal active" : "goal inactive";
+    }
+
+    function updateSubscribeMarker(enable) {
+      subscribed = !!enable;
+      subscribeMarker.textContent = subscribed ? "subscribe: on" : "subscribe: off";
+    }
+
+    function handleMessage(data) {
+      log(`<- ${JSON.stringify(data)}`, "in");
+      if (data.type === "hello") {
+        helloPill.textContent = "hello: received";
+      } else if (data.type === "status") {
+        updateStatus(data);
+      } else if (data.type === "disconnect-result") {
+        setCubeState(false);
+        updateSubscribeMarker(false);
+        goalMarker.textContent = "goal inactive";
+        poseText.textContent = "-";
+        battText.textContent = "-";
+        ledText.textContent = "-";
+        motorText.textContent = "-";
+      } else if (data.type === "status-subscribe-result" && !data.ok) {
+        updateSubscribeMarker(!subscribed);
+      } else if (data.type === "scan-result") {
+        const suffixes = Array.isArray(data.suffixes) ? data.suffixes.join(", ") : "-";
+        scanResult.textContent = `scan-result: status=${data.status} suffixes=${suffixes}`;
+      } else if (data.type === "goal-reached") {
+        goalMarker.textContent = "goal reached";
+      } else if (data.type === "timeline-load-result") {
+        if (data.ok) {
+          timelineLoaded = true;
+          lastParsedFrames = null;
+          log("timeline loaded", "in");
+        } else {
+          timelineLoaded = false;
+        }
+      } else if (data.type === "timeline-start-result") {
+        log(`timeline start ${data.ok ? "ok" : "failed"}`, data.ok ? "in" : "error");
+      } else if (data.type === "timeline-stop-result") {
+        timelineLoaded = false;
+        log("timeline stopped", "in");
+      }
+    }
+
+    function buildUrl() {
+      const host = hostInput.value.trim();
+      const port = portInput.value.trim();
+      const path = pathInput.value.trim() || "/";
+      if (!host) {
+        alert("ホスト/IPを入力してください");
+        return null;
+      }
+      if (/^wss?:\/\//i.test(host)) {
+        return host;
+      }
+      const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+      return `ws://${host}${port ? `:${port}` : ""}${normalizedPath}`;
+    }
+
+    function connect() {
+      const url = buildUrl();
+      if (!url) return;
+      log(`connecting to ${url}`);
+      if (socket) socket.close();
+      socket = new WebSocket(url);
+      setWsState(false);
+
+      socket.onopen = () => {
+        log("WebSocket connected");
+        setWsState(true);
+      };
+
+      socket.onclose = (ev) => {
+        const code = typeof ev.code === "number" ? ev.code : "n/a";
+        const reason = ev.reason || "no reason";
+        log(`WebSocket closed (code=${code}, reason=${reason})`);
+        setWsState(false);
+        setCubeState(false);
+        updateSubscribeMarker(false);
+        goalMarker.textContent = "goal inactive";
+        poseText.textContent = "-";
+        battText.textContent = "-";
+        ledText.textContent = "-";
+        motorText.textContent = "-";
+      };
+
+      socket.onerror = (ev) => {
+        const state = socket ? socket.readyState : -1;
+        log(`WebSocket error: ${ev.message || ev.type || "unknown"} (readyState=${state})`, "error");
+      };
+
+      socket.onmessage = (event) => {
+        try {
+          const json = JSON.parse(event.data);
+          handleMessage(json);
+        } catch (err) {
+          log(`<- ${event.data}`, "in");
+        }
+      };
+    }
+
+    function disconnect() {
+      if (!socket) {
+        setWsState(false);
+        return;
+      }
+      if (socket.readyState === WebSocket.OPEN) {
+        // Ensure toio側も切断されるよう、先にdisconnectを送ってからWSを閉じる
+        send("disconnect");
+        setTimeout(() => {
+          if (socket) {
+            socket.close();
+            socket = null;
+            setWsState(false);
+          }
+        }, 50);
+        return;
+      }
+      socket.close();
+      socket = null;
+      setWsState(false);
+    }
+
+    function send(type, payload = {}) {
+      if (!socket || socket.readyState !== WebSocket.OPEN) {
+        log("not connected", "error");
+        return;
+      }
+      const message = { type, id: `cli-${nextId++}`, ...payload };
+      socket.send(JSON.stringify(message));
+      log(`-> ${JSON.stringify(message)}`, "out");
+    }
+
+    function handleAction(action) {
+      switch (action) {
+        case "scan":
+          send("scan");
+          break;
+        case "connect":
+          send("connect", { suffix: suffixInput.value.trim() });
+          break;
+        case "disconnect":
+          send("disconnect");
+          break;
+        case "status-request":
+          send("status-request");
+          break;
+        case "subscribe-toggle":
+          updateSubscribeMarker(!subscribed);
+          send("status-subscribe", { enable: subscribed });
+          break;
+        case "led":
+          send("led", {
+            r: Number(ledInputs.r.value),
+            g: Number(ledInputs.g.value),
+            b: Number(ledInputs.b.value),
+          });
+          break;
+        case "motor":
+          send("motor", {
+            left: Number(motorInputs.left.value),
+            right: Number(motorInputs.right.value),
+          });
+          break;
+        case "goal-set":
+          const usePos = goalInputs.usePos.checked;
+          const useRot = goalInputs.useRot.checked;
+          if (!usePos && !useRot) {
+            log("goal-set requires use_position or use_rotation", "error");
+            return;
+          }
+          if (usePos && (goalInputs.x.value === "" || goalInputs.y.value === "")) {
+            log("goal-set requires x and y when use_position is on", "error");
+            return;
+          }
+          if (useRot && goalInputs.angle.value === "") {
+            log("goal-set requires rotation when use_rotation is on", "error");
+            return;
+          }
+          send("goal-set", {
+            use_position: usePos,
+            use_rotation: useRot,
+            x: usePos ? Number(goalInputs.x.value) : undefined,
+            y: usePos ? Number(goalInputs.y.value) : undefined,
+            rotation: useRot ? Number(goalInputs.angle.value) : undefined,
+            stop_distance: goalInputs.stop.value ? Number(goalInputs.stop.value) : undefined,
+            angle_tolerance: goalInputs.angleTol.value ? Number(goalInputs.angleTol.value) : undefined,
+          });
+          break;
+        case "goal-clear":
+          send("goal-clear");
+          break;
+        case "goal-tuning":
+          if (
+            tuningInputs.vmax.value === "" ||
+            tuningInputs.wmax.value === "" ||
+            tuningInputs.kr.value === "" ||
+            tuningInputs.ka.value === ""
+          ) {
+            log("goal-tuning requires vmax, wmax, k_r, k_a", "error");
+            return;
+          }
+          send("goal-tuning", {
+            vmax: Number(tuningInputs.vmax.value),
+            wmax: Number(tuningInputs.wmax.value),
+            k_r: Number(tuningInputs.kr.value),
+            k_a: Number(tuningInputs.ka.value),
+            reverse_threshold_deg: tuningInputs.revTh.value ? Number(tuningInputs.revTh.value) : undefined,
+            reverse_hysteresis_deg: tuningInputs.revHys.value ? Number(tuningInputs.revHys.value) : undefined,
+          });
+          break;
+        default:
+          log(`unknown action: ${action}`, "error");
+      }
+    }
+
+    function parseTimelineInput() {
+      let json;
+      try {
+        json = JSON.parse(timelineInput.value);
+      } catch (e) {
+        log(`timeline parse error: ${e.message}`, "error");
+        return null;
+      }
+      if (!json || !Array.isArray(json.frames) || json.frames.length === 0) {
+        log("timeline requires frames[]", "error");
+        return null;
+      }
+      const frames = [];
+      for (let i = 0; i < json.frames.length; ++i) {
+        const f = json.frames[i];
+        const up = !!f.use_position;
+        const ur = !!f.use_rotation;
+        if (typeof f.time !== "number" || f.time < 0) {
+          log(`frame ${i}: invalid time`, "error");
+          return null;
+        }
+        const frame = {
+          t: f.time,
+          up,
+          ur,
+          x: up ? Number(f.position?.x) : 0,
+          y: up ? Number(f.position?.y) : 0,
+          ang: ur ? Number(f.rotation ?? f.angle) : 0,
+          sd: typeof f.stop_distance === "number" ? f.stop_distance : 20,
+          at: typeof f.angle_tolerance === "number" ? f.angle_tolerance : 5,
+        };
+        if (typeof f.sound === "string" && f.sound.trim().length > 0) {
+          frame.sound = f.sound;
+        }
+        if (up && (!Number.isFinite(frame.x) || !Number.isFinite(frame.y))) {
+          log(`frame ${i}: position x/y required`, "error");
+          return null;
+        }
+        if (ur && !Number.isFinite(frame.ang)) {
+          log(`frame ${i}: angle required`, "error");
+          return null;
+        }
+        frames.push(frame);
+      }
+      frames.sort((a, b) => a.t - b.t);
+      return frames;
+    }
+
+    function sendTimelineLoad() {
+      const frames = parseTimelineInput();
+      if (!frames) return;
+      lastParsedFrames = frames;
+      timelineLoaded = false;
+      send("timeline-load", { frames });
+    }
+
+    function sendTimelineStart() {
+      if (!timelineLoaded && !lastParsedFrames) {
+        log("timeline not loaded; please write first", "error");
+        return;
+      }
+      const startOffsetSec = timelineStartOffsetInput.value
+        ? Number(timelineStartOffsetInput.value)
+        : 0;
+      const startEpoch =
+        startOffsetSec > 0 ? Math.floor(Date.now() + startOffsetSec * 1000) : 0;
+      const delay = timelineDelayInput.value ? Number(timelineDelayInput.value) : 0;
+      const payload = { delay_ms: delay };
+      if (startEpoch > 0) {
+        payload.start_epoch_ms = startEpoch;
+      }
+      send("timeline-start", payload);
+    }
+
+    function sendTimelineInitGoal() {
+      const frames = parseTimelineInput();
+      if (!frames || frames.length === 0) {
+        log("timeline init: parse failed", "error");
+        return;
+      }
+      const f = frames[0];
+      if (!f.up && !f.uh) {
+      log("timeline init: first frame must have use_position or use_rotation", "error");
+        return;
+      }
+      send("goal-set", {
+        use_position: f.up,
+        use_rotation: f.ur,
+        x: f.up ? f.x : undefined,
+        y: f.up ? f.y : undefined,
+        rotation: f.ur ? f.ang : undefined,
+        stop_distance: f.sd,
+        angle_tolerance: f.at,
+      });
+    }
+
+    function stopTimelinePlayback() {
+      send("timeline-stop");
+      timelineLoaded = false;
+    }
+
+    function loadSampleTimeline() {
+      const sample = {
+        frames: [
+          { time: 0, use_position: true, use_rotation: false, position: { x: 100, y: 100 }, stop_distance: 20, sound: "aurora" },
+          { time: 2, use_position: true, use_rotation: false, position: { x: 200, y: 200 }, sound: "frog" },
+          { time: 4, use_position: false, use_rotation: true, rotation: 90, angle_tolerance: 5, sound: "reef" },
+        ],
+      };
+      timelineInput.value = JSON.stringify(sample, null, 2);
+    }
+
+    connectBtn.addEventListener("click", connect);
+    disconnectBtn.addEventListener("click", disconnect);
+    document.querySelectorAll("button[data-action]").forEach((btn) => {
+      btn.addEventListener("click", () => handleAction(btn.dataset.action));
+    });
+    document.getElementById("clear-log").addEventListener("click", () => {
+      logView.innerHTML = "";
+    });
+    document.getElementById("timeline-load-btn").addEventListener("click", sendTimelineLoad);
+    document.getElementById("timeline-start-btn").addEventListener("click", sendTimelineStart);
+    document.getElementById("timeline-init-btn").addEventListener("click", sendTimelineInitGoal);
+    document.getElementById("timeline-stop").addEventListener("click", stopTimelinePlayback);
+    document.getElementById("timeline-sample").addEventListener("click", loadSampleTimeline);
+  </script>
+</body>
+</html>
